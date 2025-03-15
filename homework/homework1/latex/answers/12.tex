@@ -1,0 +1,41 @@
+原问题与其对偶问题之间的核心联系体现在对偶定理.
+
+\begin{theorem}[弱对偶定理]
+    对于任何原问题的可行解$\bm{x}$及其对偶问题的可行解$\bm{y}$, 总有
+    \begin{equation*}
+        \bm{c}^\mathrm{T}\bm{x}\leq\bm{b}^\mathrm{T}\bm{y}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[强对偶定理]
+    若原问题及其对偶问题均有可行解且分别为$\bm{x}^*$和$\bm{y}^*$, 则
+    \begin{equation*}
+        \bm{c}^\mathrm{T}\bm{x}^*=\bm{b}^\mathrm{T}\bm{y}^*
+    \end{equation*}
+\end{theorem}
+
+原问题与其对偶问题之间的区别在于:
+\begin{itemize}
+    \item
+        目标函数的区别
+        \begin{itemize}
+            \item 原问题是最大化问题$\max\bm{c}^\mathrm{T}\bm{x}$.
+            \item 其对偶问题是最大化问题$\min\bm{b}^\mathrm{T}\bm{y}$.
+        \end{itemize}
+
+    \item
+        约束条件的转换
+        \begin{itemize}
+            \item 原问题的约束右端项$\bm{b}$变成其对偶目标函数的系数.
+            \item 原问题的目标函数系数$\bm{c}$变成其对偶约束的右端项.
+            \item 原问题的约束方向$\leq$变成对偶问题的$\geq$.
+        \end{itemize}
+
+    \item 变量的物理意义
+
+        在资源分配问题中, 原问题变量$\bm{x}$表示实际分配方案, 而其对偶变量$\bm{y}$可以解释为资源的影子价格, 表示单位资源的价值.
+
+    \item 计算难度
+
+        若原问题有$n$个变量和$m$个约束, 当$m\ll n$时求解对偶问题可能更简单.
+\end{itemize}

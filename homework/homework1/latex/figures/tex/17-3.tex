@@ -1,0 +1,67 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        axis equal image,
+        axis x line = middle,
+        axis y line = center,
+        tick align = inside,
+        xmin = -1.25,
+        xmax = 12.25,
+        ymin = -1.25,
+        ymax = 7.25,
+        xtick=\empty,
+        ytick=\empty,
+        xlabel = $x_1$,
+        ylabel = $x_2$,
+        xlabel style = {anchor = west, font = \tiny},
+        ylabel style = {anchor = west, font = \tiny},
+    ]
+    \addplot [
+        smooth,
+        domain=1:4,
+        samples=500
+    ] {3-0.4*x};
+    \addplot [
+        smooth,
+        domain=4:7.5,
+        samples=500
+    ] {3-0.4*4};
+    \addplot [
+        smooth,
+        domain=7.5:10,
+        samples=500
+    ] {0.9*(x-7.5)+(3-0.4*4)};
+    \addplot [
+        smooth,
+        domain=10:8.2,
+        samples=500
+    ] {-1.2*(x-10)+(0.9*(10-7.5)+(3-0.4*4))};
+    \addplot [
+        smooth,
+        domain=8.2:6,
+        samples=500
+    ] {-0.3*(x-8.2)+(-1.2*(8.2-10)+(0.9*(10-7.5)+(3-0.4*4)))};
+    \addplot [
+        smooth,
+        domain=6:3,
+        samples=500
+    ] {0.3*(x-6)+(-0.3*(6-8.2)+(-1.2*(8.2-10)+(0.9*(10-7.5)+(3-0.4*4))))};
+    \addplot [
+        smooth,
+        domain=3:1,
+        samples=500
+    ] {1.485*(x-1)+2.6};
+
+    \addplot [mark=*,red] coordinates {(3, 3)} node [black, below, font=\tiny] {初始解};
+
+    \addplot [mark=*,red] coordinates {(6, 6.47)} node [black, above, font=\tiny] {最优解};
+
+    \addplot[
+        smooth,
+        red,
+        domain=3:6-0.07,
+        samples=500,
+        -latex
+    ] {3.47/3*(x-3)+3};
+
+    \end{axis}
+\end{tikzpicture}

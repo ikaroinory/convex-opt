@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+    \draw[thick] (0,0) circle(1.5);
+    \draw[thick] (2,0) circle(1.5);
+
+    \node at (-0.8, 0) {$S_1$};
+    \node at (2.8, 0) {$S_2$};
+
+    \node at (1, -2) {$S_1\cup S_2$};
+
+    \filldraw[red] (0, 1.5) circle(2pt) node[anchor=south] {$s_1$};
+    \filldraw[red] (2, 1.5) circle(2pt) node[anchor=south] {$s_2$};
+    \draw[red, thick, dashed] (0, 1.5) -- (2, 1.5);
+\end{tikzpicture}

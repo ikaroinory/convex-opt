@@ -1,0 +1,44 @@
+问题可写成
+\begin{equation*}
+    \begin{pmatrix}
+        1 & 2 & 3 & -1 & 1 \\
+        -1 & 1 & -3 & 2 & -1
+    \end{pmatrix}
+    \bm{x}
+    =
+    \begin{pmatrix}
+        4 \\
+        -5
+    \end{pmatrix},
+\end{equation*}
+基本解见\cref{table:6}.
+
+\begin{table}[ht]
+    \centering
+    \caption{}
+    \label{table:6}
+    \begin{tabular}{cccc}
+        \toprule
+
+        $\bm{B}$ & $\bm{B}^{-1}$ & $\bm{x}_B$ & 基本解 \\
+
+        \midrule
+
+        $\begin{pmatrix}\bm{P}_1 & \bm{P}_2\end{pmatrix}$ &
+        $\frac{1}{3}\begin{pmatrix}1 & -2 \\ 1 & 1\end{pmatrix}$ &
+        $\begin{pmatrix}\frac{14}{3} & -\frac{1}{3}\end{pmatrix}^\mathrm{T}$ &
+        $\begin{pmatrix}\frac{14}{3} & -\frac{1}{3} & 0 & 0 & 0\end{pmatrix}^\mathrm{T}$ \\
+
+        $\begin{pmatrix}\bm{P}_1 & \bm{P}_4\end{pmatrix}$ &
+        $\begin{pmatrix}2 & 1 \\ 1 & 1\end{pmatrix}$ &
+        $\begin{pmatrix}3 & -1\end{pmatrix}^\mathrm{T}$ &
+        $\begin{pmatrix}3 & 0 & 0 & -1 & 0\end{pmatrix}^\mathrm{T}$ \\
+
+        $\begin{pmatrix}\bm{P}_2 & \bm{P}_3\end{pmatrix}$ &
+        $\frac{1}{9}\begin{pmatrix}3 & 3 \\ 1 & -2\end{pmatrix}$ &
+        $\begin{pmatrix}-\frac{1}{3} & -\frac{14}{9}\end{pmatrix}^\mathrm{T}$ &
+        $\begin{pmatrix}0 & -\frac{1}{3} & -\frac{14}{9} & 0 & 0\end{pmatrix}^\mathrm{T}$ \\
+
+        \bottomrule
+    \end{tabular}
+\end{table}

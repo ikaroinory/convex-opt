@@ -1,0 +1,42 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        axis equal image,
+        axis y line=center,
+        axis x line=middle,
+        tick align=inside,
+        xmin=-0.25,xmax=5.25,
+        ymin=-2.25,ymax=3.25,
+        ytick distance=1,
+        xtick distance=1,
+        xtick style = {color = black, line width = 0.5pt},
+        ytick style = {color=black,line width=0.5pt},
+        xlabel = $x_1$,
+        ylabel = $x_2$,
+        xlabel style = {anchor = north west, font = \tiny},
+        ylabel style = {anchor = west, font = \tiny},
+        tick label style = {font = \tiny}
+    ]
+    \addplot [
+        name path=A,
+        smooth,
+        domain=0:1,
+        samples=2000
+    ] {1-x};
+    \addplot [
+        name path=B,
+        smooth,
+        domain=0:4,
+        samples=2000
+    ] {2-1/2*x};
+
+    % \addplot [fill=red, fill opacity=0.3] fill between[of=A and B];
+
+    \addplot[
+        smooth,
+        domain=0:2,
+        samples=2000,
+        ->
+    ] {-2/3*x};
+
+    \end{axis}
+\end{tikzpicture}

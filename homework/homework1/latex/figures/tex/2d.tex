@@ -1,0 +1,46 @@
+\pgfplotsset{compat=1.18}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        % compat=1.18,
+        axis equal image,
+        axis x line = middle,
+        axis y line = center,
+        tick align = inside,
+        xmin = -4.25,
+        xmax = 4.25,
+        ymin = -1.75,
+        ymax = 5.75,
+        ytick distance = 1,
+        xtick distance = 1,
+        xtick style = {color = black, line width = 0.5pt},
+        ytick style = {color=black,line width=0.5pt},
+        xlabel = $x_1$,
+        ylabel = $x_2$,
+        xlabel style = {anchor = north west, font = \tiny},
+        ylabel style = {anchor = west, font = \tiny},
+        tick label style = {font = \tiny}
+    ]
+    \addplot [
+        name path=A,
+        smooth,
+        domain=-2.5:2.5,
+        samples=500
+    ] {x*x-1};
+
+    \path[name path=B] (2.5, 5.25) -- (3.5, 5.25);
+    \path[name path=C] (-2.5, 5.25) -- (-3.5, 5.25);
+
+    \path[name path=endA] (-2.5, -1.5) -- (2.5, -1.5);
+    \path[name path=endB] (2.5, -1.5) -- (3.5, -1.5);
+    \path[name path=endC] (-2.5, -1.5) -- (-3.5, -1.5);
+
+    \addplot [fill=red, fill opacity=0.3] fill between [of=A and endA];
+    \addplot [fill=red, fill opacity=0.3] fill between [of=B and endB];
+    \addplot [fill=red, fill opacity=0.3] fill between [of=C and endC];
+
+    \filldraw[red] (2.8, 1.9) circle(1pt);
+    \filldraw[red] (-3.2, 3.7) circle(1pt);
+    \draw[red, dashed] (2.8, 1.9) -- (-3.2, 3.7);
+    \end{axis}
+\end{tikzpicture}

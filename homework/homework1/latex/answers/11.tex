@@ -1,0 +1,16 @@
+对于线性规划问题
+\optmodule*[LP]{\max}{\bm{c}^\mathrm{T}\bm{x}}{
+    &\bm{Ax}\leq\bm{b}, \\
+    &\bm{x}\geq\bm{0},
+}
+其对偶问题为
+\optmodule*[DP]{\min}{\bm{b}^\mathrm{T}\bm{y}}{
+    &\bm{A}^\mathrm{T}\bm{y}\geq\bm{c}, \\
+    &\bm{y}\geq\bm{0},
+}
+则DP的对偶问题为
+\optmodule*{\max}{\bm{c}^\mathrm{T}\bm{x}}{
+    &\bm{Ax}\leq\bm{b}, \\
+    &\bm{x}\geq\bm{0},
+}
+证毕.

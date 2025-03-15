@@ -1,0 +1,21 @@
+\textbf{必要性}:
+若$\bm{x}=\begin{pmatrix}x_1 & \cdots & x_k & 0 & \cdots 0\end{pmatrix}^\mathrm{T}\in\mathbb{R}^n$为基本可行解, 且$x_1,\cdots,x_k>0$, 对应的$\bm{B}=\begin{pmatrix}\bm{P}_1 & \bm{P}_2 & \cdots & \bm{P}_k\end{pmatrix}$.
+假设$\bm{P}_1, \bm{P}_2, \cdots, \bm{P}_k$线性相关, 则$\exists\bm{d}\ne\bm{0}$, s.t. $\bm{Ad}=\bm{0}$.
+将$\bm{x}$沿$\bm{d}$的方向移动$\lambda$, 得到$\bm{x}+\lambda\bm{d}$, 则
+\begin{equation*}
+    \bm{A}(\bm{x}+\lambda\bm{d})=\bm{Ax}+\lambda\bm{Ad}=\bm{b},
+\end{equation*}
+这说明$\bm{x}+\lambda\bm{d}$仍然满足原约束, 只需$\bm{x}+\lambda\bm{d}\geq\bm{0}$, 这说明$\bm{x}$不唯一, 因此不是基本可行解.
+
+
+\textbf{充分性}:
+若$\bm{x}$为可行解, 且$\bm{P}_1, \bm{P}_2, \cdots, \bm{P}_k$线性无关, 则可令
+\begin{equation*}
+    \bm{B}
+    =
+    \begin{pmatrix}
+        \bm{P}_1 & \bm{P}_2 & \cdots & \bm{P}_k
+    \end{pmatrix},
+\end{equation*}
+此时$\bm{x}$可分为$\bm{x}_B$和$\bm{x}_N$两部分, 且$\bm{x}_B=\bm{B}^{-1}\bm{b}$.
+由于$\bm{x}_B$唯一确定, 则$\bm{x}_N$也唯一确定且$\bm{x}_N=\bm{0}$, 因此$\bm{x}$是基本可行解.

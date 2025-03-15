@@ -1,0 +1,96 @@
+\begin{enumerate}[label=\alph*)]
+    \item 
+        将问题化为标准型:
+        \optmodule*{\max}{2x_1'+x_2-2x_3'+2x_3''}{
+            &x_1'+x_2+x_3'-x_3''=4, \\
+            &x_1'+x_2-x_3'+x_3''+x_4=6, \\
+            &x_1',x_2,x_3',x_3'',x_4\geq0,
+        }
+        则$\bm{A}=(\bm{P}_1 ~~ \bm{P}_2 ~~ \bm{P}_3 ~~ \bm{P}_4 ~~ \bm{P}_5)=\begin{pmatrix}
+            1 & 1 & 1 & -1 & 0 \\
+            1 & 1 & -1 & 1 & 1
+        \end{pmatrix}$, $\bm{b}=(4 ~~ 6)^\mathrm{T}$.
+
+        \begin{table}[ht]
+            \centering
+            \caption{}
+            \label{table:4a}
+            \resizebox{0.8\textwidth}{!}{
+                \begin{tabular}{ccccc}
+                    \toprule
+
+                    $\bm{B}$ & $\bm{B}^{-1}$ & $\bm{x}_B=\bm{B}^{-1}\bm{b}$ & 基本解 & 值 \\
+
+                    \midrule
+
+                    $\begin{pmatrix}\bm{P}_1 & \bm{P}_2\end{pmatrix}$, $\begin{pmatrix}\bm{P}_3 & \bm{P}_4\end{pmatrix}$ &
+                    - &
+                    - &
+                    - &
+                    - \\
+
+                    $\begin{pmatrix}\bm{P}_1 & \bm{P}_3\end{pmatrix}$, $\begin{pmatrix}\bm{P}_2 & \bm{P}_3\end{pmatrix}$ &
+                    $\frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$ &
+                    $\begin{pmatrix}5 & -1\end{pmatrix}^\mathrm{T}$ &
+                    \makecell[c]{
+                        $\begin{pmatrix}5 & 0 & -1 & 0 & 0\end{pmatrix}^\mathrm{T}$ \\
+                        $\begin{pmatrix}0 & 5 & -1 & 0 & 0\end{pmatrix}^\mathrm{T}$
+                    } &
+                    - \\
+
+                    $\begin{pmatrix}\bm{P}_1 & \bm{P}_4\end{pmatrix}$, $\begin{pmatrix}\bm{P}_2 & \bm{P}_4\end{pmatrix}$ &
+                    $\frac{1}{2}\begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}$ &
+                    $\begin{pmatrix}5 & 1\end{pmatrix}^\mathrm{T}$ &
+                    \makecell[c]{
+                        $\begin{pmatrix}5 & 0 & 0 & 1 & 0\end{pmatrix}^\mathrm{T}$ \\
+                        $\begin{pmatrix}0 & 5 & 0 & 1 & 0\end{pmatrix}^\mathrm{T}$
+                    } &
+                    12 \\
+
+                    $\begin{pmatrix}\bm{P}_1 & \bm{P}_5\end{pmatrix}$, $\begin{pmatrix}\bm{P}_2 & \bm{P}_5\end{pmatrix}$&
+                    $\begin{pmatrix} 1 & 0 \\ -1 & 1 \end{pmatrix}$ &
+                    $\begin{pmatrix}4 & 2\end{pmatrix}^\mathrm{T}$ &
+                    \makecell[c]{
+                        $\begin{pmatrix}4 & 0 & 0 & 0 & 2\end{pmatrix}^\mathrm{T}$ \\
+                        $\begin{pmatrix}0 & 4 & 0 & 0 & 2\end{pmatrix}^\mathrm{T}$
+                    } &
+                    8 \\
+
+                    $\begin{pmatrix}\bm{P}_3 & \bm{P}_5\end{pmatrix}$ &
+                    $\begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$ &
+                    $\begin{pmatrix}4 & 10\end{pmatrix}^\mathrm{T}$ &
+                    $\begin{pmatrix}0 & 0 & 3 & 0 & 10\end{pmatrix}^\mathrm{T}$ &
+                    $-8$ \\
+
+                    $\begin{pmatrix}\bm{P}_4 & \bm{P}_5\end{pmatrix}$ &
+                    $-\begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$ &
+                    $\begin{pmatrix}-4 & -10\end{pmatrix}^\mathrm{T}$ &
+                    $\begin{pmatrix}0 & 0 & 0 & -4 & -10\end{pmatrix}^\mathrm{T}$ &
+                    - \\
+
+                    \bottomrule
+                \end{tabular}
+            }
+        \end{table}
+        讨论过程如\cref{table:4a}所示, 最优解为$(5 ~~ 0 ~~ 0 ~~ 1 ~~ 0)^\mathrm{T}$, 最优值为12.
+
+    \item
+        将问题化为标准型:
+        \optmodule*{\max}{-2x_1+x_2'-3x_3-x_4'+x_4''}{
+            &x_1-x_2'+x_3+x_4'-x_4''+x_5=7, \\
+            &-2x_1-3x_2'-5x_3=8, \\
+            &x_1-2x_3+2x_4'-2x_4''-x_6=1, \\
+            &x_1,x_2',x_3,x_4',x_4'',x_5,x_6\geq0,
+        }
+        则
+        $
+        \bm{A}
+        =(\bm{P}_1 ~~ \bm{P}_2 ~~ \bm{P}_3 ~~ \bm{P}_4 ~~ \bm{P}_5 ~~ \bm{P}_6 ~~ \bm{P}_7)
+        =\begin{pmatrix}
+            1 & -1 & 1 & 1 & -1 & 1 & 0 \\
+            -2 & -3 & -5 & 0 & 0 & 0 & 0 \\
+            1 & 0 & -2 & 2 & -2 & 0 & -1
+        \end{pmatrix}
+        $, $\bm{b}=(7 ~~ 8 ~~ 1)^\mathrm{T}$.
+        由约束可知, 当$x_1,x_2',x_3\geq0$时, $-2x_1-3x_2'-5x_3=8$不成立, 因此该问题无解.
+\end{enumerate}

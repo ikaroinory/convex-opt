@@ -1,0 +1,38 @@
+由题可知,
+$
+    \bm{A}
+    =\begin{pmatrix}\bm{P}_1 & \bm{P}_2 & \bm{P}_3 & \bm{P}_4\end{pmatrix}
+    =\begin{pmatrix} 2 & 4 & 2 & 2 \\ 4 & 10 & 6 & 8 \end{pmatrix}
+$, $\bm{b}=\begin{pmatrix} 4 \\ 12 \end{pmatrix}$.
+基本解及$\bm{B}$, $\bm{B}^{-1}$, $\bm{N}$, $\bm{x}_B$, $\bm{x}_N$见\cref{table:7}.
+
+\begin{table}[ht]
+    \centering
+    \caption{}
+    \label{table:7}
+    \resizebox{0.8\textwidth}{!}{
+        \begin{tabular}{cccccc}
+            \toprule
+
+            $\bm{B}$ & $\bm{N}$ & $\bm{B}^{-1}$ & $\bm{x}_B$ & $\bm{x}_N$ & 基本解 \\
+
+            \midrule
+
+            $\begin{pmatrix}\bm{P}_1 & \bm{P}_2\end{pmatrix}$ &
+            $\begin{pmatrix}\bm{P}_3 & \bm{P}_4\end{pmatrix}$ &
+            $\frac{1}{2}\begin{pmatrix} 5 & -2 \\ -2 & 1 \end{pmatrix}$ &
+            $\begin{pmatrix} -2 & 2 \end{pmatrix}^\mathrm{T}$ &
+            $\begin{pmatrix} 0 & 0 \end{pmatrix}^\mathrm{T}$ &
+            $\begin{pmatrix} -2 & 2 & 0 & 0 \end{pmatrix}^\mathrm{T}$ \\
+
+            $\begin{pmatrix}\bm{P}_1 & \bm{P}_3\end{pmatrix}$ &
+            $\begin{pmatrix}\bm{P}_2 & \bm{P}_4\end{pmatrix}$ &
+            $\frac{1}{2}\begin{pmatrix} 3 & -1 \\ -2 & 1 \end{pmatrix}$ &
+            $\begin{pmatrix} 0 & 2 \end{pmatrix}^\mathrm{T}$ &
+            $\begin{pmatrix} 0 & 0 \end{pmatrix}^\mathrm{T}$ &
+            $\begin{pmatrix} 0& 0 & 2 & 0 \end{pmatrix}^\mathrm{T}$ \\
+
+            \bottomrule
+        \end{tabular}
+    }
+\end{table}

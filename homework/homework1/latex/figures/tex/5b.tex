@@ -1,0 +1,67 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        axis equal image,
+        axis x line = middle,
+        axis y line = center,
+        tick align = inside,
+        xmin = -1.25,
+        xmax = 17.25,
+        ymin = -5.25,
+        ymax = 9.25,
+        ytick distance = 2,
+        xtick distance = 2,
+        xtick style = {color = black, line width = 0.5pt},
+        ytick style = {color=black,line width=0.5pt},
+        xlabel = $x_1$,
+        ylabel = $x_2$,
+        xlabel style = {anchor = north west, font = \tiny},
+        ylabel style = {anchor = west, font = \tiny},
+        tick label style = {font = \tiny}
+    ]
+    \addplot [
+        smooth,
+        domain=0:385/41,
+        samples=500
+    ] {8-4/7*x};
+    \addplot [
+        name path=A,
+        smooth,
+        domain=385/41:14,
+        samples=500
+    ] {8-4/7*x};
+    \addplot [
+        name path=A,
+        smooth,
+        domain=14:16,
+        samples=500
+    ] {0};
+
+    \addplot [
+        smooth,
+        domain=5:385/41,
+        samples=500
+    ] {3/5*x-3};
+    \addplot [
+        name path=B,
+        smooth,
+        domain=385/41:16,
+        samples=500
+    ] {3/5*x-3};
+
+    \addplot [fill=red, fill opacity=0.3] fill between[of=A and B];
+
+    \addplot[
+        smooth,
+        domain=2:-1,
+        samples=500,
+        ->
+    ] {-3*x};
+
+    \addplot[
+        smooth,
+        domain=-0.5:16.5,
+        samples=500
+    ] {1/3*(x-14.5)};
+
+    \end{axis}
+\end{tikzpicture}

@@ -1,0 +1,64 @@
+\pgfplotsset{compat=1.18}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        % compat=1.18,
+        axis equal image,
+        axis x line = middle,
+        axis y line = center,
+        tick align = inside,
+        xmin = -10.25,
+        xmax = 13.25,
+        ymin = -10.25,
+        ymax = 13.25,
+        ytick distance = 2,
+        xtick distance = 2,
+        xtick style = {color = black, line width = 0.5pt},
+        ytick style = {color=black,line width=0.5pt},
+        xlabel = $x_1$,
+        ylabel = $x_2$,
+        xlabel style = {anchor = north west, font = \tiny},
+        ylabel style = {anchor = west, font = \tiny},
+        tick label style = {font = \tiny}
+    ]
+    \addplot [
+        smooth,
+        domain=atan(1/9):180+atan(1/9),
+        samples=500
+    ] ({4*cos(x)}, {4*sin(x)});
+    \addplot [
+        name path=B,
+        smooth,
+        domain=180+atan(1/9):360+atan(1/9),
+        samples=500
+    ] ({4*cos(x)}, {4*sin(x)});
+
+    \addplot [
+        smooth,
+        domain=-10:10,
+        samples=500
+    ] {1/9*x};
+
+    \addplot [
+        smooth,
+        domain=-0.5:10,
+        samples=500
+    ] {10-2*x};
+
+    \path[name path=A] ({36/sqrt(82)}, {4/sqrt(82)}) -- (90/19, 10/19) -- (10,-10);
+    \path[name path=C] (-10, -10/9) -- ({-36/sqrt(82)}, {-4/sqrt(82)});
+
+    \path[name path=endA] ({36/sqrt(82)}, -10) -- (90/19,-10) -- (10,-10);
+
+    \path[name path=endB] ({-36/sqrt(82)}, -10) -- ({36/sqrt(82)},-10);
+    \path[name path=endC] (-10, -10) -- ({-36/sqrt(82)}, -10);
+
+    \addplot [fill=red, fill opacity=0.3] fill between [of=A and endA];
+    \addplot [fill=red, fill opacity=0.3] fill between [of=B and endB];
+    \addplot [fill=red, fill opacity=0.3] fill between [of=C and endC];
+
+    \filldraw[red] (4.2, -1.9) circle(1pt);
+    \filldraw[red] (-4.6, -2.7) circle(1pt);
+    \draw[red, dashed] (4.2, -1.9) -- (-4.6, -2.7);
+    \end{axis}
+\end{tikzpicture}
