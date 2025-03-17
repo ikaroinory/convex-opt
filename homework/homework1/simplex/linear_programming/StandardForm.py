@@ -97,4 +97,5 @@ class StandardForm:
 
         x_star = np.zeros([self.n], dtype=np.float64)
         x_star[x_B_index_list] = Ab[:, -1]
-        return x_star, self.c @ x_star
+
+        return x_star, round(self.c @ x_star, 8)
