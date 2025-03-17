@@ -41,9 +41,19 @@ question_list = [
     )
 ]
 
-for i, j, k in question_list:
-    standard_form = lp.StandardForm(i, j, k)
+for i, (c, A, b) in enumerate(question_list):
+    print('-' * 50)
+    print()
+    standard_form = lp.StandardForm(c, A, b)
+
+    print(f'Question {i + 1}:')
+    print()
     print(standard_form)
+
     x_star, value = standard_form.solve()
-    print(x_star)
-    print(value)
+
+    print()
+    print('Optimal solution:', x_star)
+    print('Optimal value:   ', value)
+    print()
+    print('-' * 50)
