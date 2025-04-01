@@ -1,16 +1,16 @@
 import torch
 
 
-def rosenbrock_banana(x: torch.Tensor, a=1, b=5) -> torch.Tensor:
+def rosenbrock_banana(data: torch.Tensor, a=1, b=5) -> torch.Tensor:
     """
     Rosenbrock Banana function.
-    :param x: The input tensor with shape of (*, 2).
+    :param data: The input tensor with shape of (*, 2).
     :param a: Parameter.
     :param b: Parameter.
     :return: Rosenbrock Banana function value with shape of (*).
     """
 
-    item1 = (a - x[..., 0]) ** 2
-    item2 = b * (x[..., 1] - x[..., 0] ** 2) ** 2
+    x = data[..., 0]
+    y = data[..., 1]
 
-    return item1 - item2
+    return (a - x) ** 2 - b * (y - x ** 2) ** 2
