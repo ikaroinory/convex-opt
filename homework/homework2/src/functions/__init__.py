@@ -3,6 +3,7 @@ from .bohachevsky import bohachevsky
 from .booth import booth
 from .branin import branin
 from .flower import flower
+from .himmelblau import himmelblau
 from .mc_cormick import mc_cormick
 from .michalewicz import michalewicz
 from .rosenbrock_banana import rosenbrock_banana
