@@ -3,7 +3,9 @@ import torch
 
 def booth(data: torch.Tensor) -> torch.Tensor:
     """
+
     Booth function.
+
     :param data: The input tensor with shape of (*, 2).
     :return: Booth function value with shape of (*).
     """

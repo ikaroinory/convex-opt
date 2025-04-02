@@ -3,7 +3,9 @@ import torch
 
 def mc_cormick(data: torch.Tensor) -> torch.Tensor:
     """
+
     McCormick function.
+
     :param data: The input tensor with shape of (*, 2).
     :return: McCormick function value with shape of (*).
     """

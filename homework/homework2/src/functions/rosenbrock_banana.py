@@ -3,7 +3,9 @@ import torch
 
 def rosenbrock_banana(data: torch.Tensor, a=1, b=5) -> torch.Tensor:
     """
+
     Rosenbrock Banana function.
+
     :param data: The input tensor with shape of (*, 2).
     :param a: Parameter.
     :param b: Parameter.

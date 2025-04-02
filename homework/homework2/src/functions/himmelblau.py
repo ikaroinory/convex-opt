@@ -3,7 +3,9 @@ import torch
 
 def himmelblau(data: torch.Tensor) -> torch.Tensor:
     """
+
     Himmelblau function.
+
     :param data: The input tensor with shape of (*, 2).
     :return: Himmelblau function value with shape of (*).
     """

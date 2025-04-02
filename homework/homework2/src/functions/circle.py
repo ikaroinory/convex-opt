@@ -3,7 +3,9 @@ import torch
 
 def circle(data: torch.Tensor) -> torch.Tensor:
     """
+
     Circle function.
+
     :param data: The input tensor with shape of (*, 2).
     :return: Circle function value with shape of (*, 2).
     """

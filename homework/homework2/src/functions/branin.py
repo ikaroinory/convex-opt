@@ -3,7 +3,9 @@ import torch
 
 def branin(data: torch.Tensor, a=1, b=5.1 / 4 / torch.pi ** 2, c=5 * torch.pi, r=6, s=10, t=1 / (8 * torch.pi)) -> torch.Tensor:
     """
+
     Branin function.
+
     :param data: The input tensor with shape of (*, 2).
     :param a: Parameter.
     :param b: Parameter.

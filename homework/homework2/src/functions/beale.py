@@ -3,7 +3,9 @@ import torch
 
 def beale(data: torch.Tensor) -> torch.Tensor:
     """
+
     Beale function.
+
     :param data: The input tensor with shape of (*, 2).
     :return: Beale function value with shape of (*).
     """

@@ -3,7 +3,9 @@ import torch
 
 def ackley(data: torch.Tensor, a=20, b=0.2, c=2 * torch.pi) -> torch.Tensor:
     """
+
     Ackley function.
+
     :param a: Parameter.
     :param b: Parameter.
     :param c: Parameter.

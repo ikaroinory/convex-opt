@@ -3,7 +3,9 @@ import torch
 
 def flower(data: torch.Tensor, a=1, b=1, c=4) -> torch.Tensor:
     """
+
     Flower function.
+
     :param data: The input tensor with shape of (*, 2).
     :param a: Parameter.
     :param b: Parameter.

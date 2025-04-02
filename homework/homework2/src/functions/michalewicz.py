@@ -3,7 +3,9 @@ import torch
 
 def michalewicz(data: torch.Tensor, m=10) -> torch.Tensor:
     """
+
     Michalewicz function.
+
     :param data: The input tensor with shape of (*, d).
     :param m: Parameter.
     :return: Michalewicz function value with shape of (*).

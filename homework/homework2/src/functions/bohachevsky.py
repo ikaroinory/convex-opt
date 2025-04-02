@@ -3,7 +3,9 @@ import torch
 
 def bohachevsky(data: torch.Tensor) -> torch.Tensor:
     """
+
     Bohachevsky function.
+
     :param data: The input tensor with shape of (*, 2).
     :return: Bohachevsky function value with shape of (*).
     """
