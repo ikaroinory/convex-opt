@@ -1,6 +1,6 @@
 import torch
 
-from optimizer import Optimizer
+from optimizer.Optimizer import Optimizer
 
 
 class FibonacciSearch(Optimizer):
