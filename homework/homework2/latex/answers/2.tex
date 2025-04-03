@@ -1,0 +1,44 @@
+\section*{2}
+
+分别使用Golden Search, Fibonacci Search, Bisection Search求解
+\begin{equation}
+    \min_{\bm{x}} f(x)=2x^2-x-1
+    \label{equation:2a}
+\end{equation}
+和
+\begin{equation}
+    \min_{\bm{x}} f(x)=3x^2-x-1,
+    \label{equation:2b}
+\end{equation}
+结果见\cref{table:2a}和\cref{table:2b}.
+
+\begin{table}[ht]
+    \centering
+    \caption{不同方法求解\cref{equation:2a}的结果}
+    \label{table:2a}
+    \begin{tabular}{cccc}
+        \toprule
+        方法 & 最优解 & 最优值 & 迭代轮次 \\
+        \midrule
+        Golden Search & $0.2574$ & $-1.1249$ & 8 \\
+        Fibonacci Search & $0.2500$ & $-1.1250$ & 30 \\
+        Bisection Search & $0.2500$ & $-1.1250$ & 2 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+    \centering
+    \caption{不同方法求解\cref{equation:2b}的结果}
+    \label{table:2b}
+    \begin{tabular}{cccc}
+        \toprule
+        方法 & 最优解 & 最优值 & 迭代轮次 \\
+        \midrule
+        Golden Search & $3.6086$ & $-39.8798$ & 12 \\
+        Fibonacci Search & $3.6000$ & $-39.8800$ & 36 \\
+        Bisection Search & $3.5889$ & $-39.8796$ & 9 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

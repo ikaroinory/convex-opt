@@ -1,0 +1,61 @@
+\section*{15}
+
+共轭函数定义如下:
+\begin{definition}
+    \label{definition:15a}
+    对于函数$f:\mathbb{R}^n\to\mathbb{R}\cup\{-\infty,+\infty\}$, 其共轭函数$f^*$定义为
+    \begin{equation*}
+        f^*(\bm{y})=\sup_{x\in\mathbb{R}^n}\{\left<\bm{y},\bm{x}\right>-f(\bm{x})\},
+    \end{equation*}
+    其中$\left<\cdot,\cdot\right>$为Euclid内积.
+\end{definition}
+
+求解共轭函数一般有如下步骤:
+\begin{enumerate}
+    \item \textbf{构造优化问题}.
+        由\cref{definition:15a}可知, 求解共轭函数是一个关于$\bm{x}$的优化问题.
+
+    \item \textbf{求导}.
+        若$f(x)$可微, 找到使得梯度为零的$x$, 即解方程
+        \begin{equation*}
+            \nabla_{\bm{x}}(\left<\bm{y},\bm{x}\right>-f(\bm{x}))=\bm{0}.
+        \end{equation*}
+    
+    \item \textbf{凸性与Legendre变换}.
+        若$f(\bm{x})$是严格凸函数, 求共轭函数的过程等价于Legendre变换, 即
+        \begin{equation*}
+            f^*(\bm{y})=\left<\bm{y},\bm{x}^*(\bm{y})\right>-f(\bm{x}^*(\bm{y})),
+        \end{equation*}
+        其中$\bm{x}^*(\bm{y})$是由$\bm{y}=\nabla f(\bm{x})$反解得到的.
+\end{enumerate}
+
+共轭函数在优化问题中扮演了关键角色, 尤其是在Lagrange对偶和Fenchel对偶中.
+\begin{enumerate}
+    \item \textbf{Lagrange对偶}.
+
+        设优化问题为
+        \optmodule*{\min_{\bm{x}}}{f(\bm{x})}{
+            &g_i(\bm{x})\leq0, \\
+            &h_j(\bm{x})=0,
+        }
+        则其对偶问题可通过Lagrange函数
+        \begin{equation*}
+            \mathcal{L}(\bm{x},\bm{\lambda},\bm{\mu})=f(\bm{x})+\sum_{i}\lambda_ig_i(\bm{x})+\sum_{j}\mu_jh_j(\bm{x})
+        \end{equation*}
+        用共轭函数表示目标函数, 从而推导对偶问题.
+    
+    \item \textbf{Fenchel对偶}.
+
+        给定函数$f(\bm{x})$和$g(\bm{y})$, 考虑优化问题
+        \begin{equation*}
+            \min_{\bm{x}} f(\bm{x})+g(\bm{Ax}),
+        \end{equation*}
+        其Fenchel对偶问题为
+        \begin{equation*}
+            \max_{\bm{y}} f^*(-\bm{A}^\mathrm{T}\bm{y})-g^*(\bm{y}),
+        \end{equation*}
+        其中$f^*$和$g^*$分别为$f$和$g$的共轭函数.
+\end{enumerate}
+
+共轭函数在优化理论中起到了桥梁作用, 将原始问题映射到其对偶问题, 从而提供了一种有效的分析工具。利用共轭函数, 可以深入研究优化问题的对偶结构, 如强对偶性条件, 对偶间隙以及对偶问题的解构特性.
+在凸优化领域, 共轭函数广泛应用于凸对偶理论, Fenchel对偶以及拉格朗日对偶方法, 为求解复杂优化问题提供了重要的理论支撑.
