@@ -1,3 +1,4 @@
+from .BisectionMethod import BisectionMethod
 from .ConjugateGradient import ConjugateGradient
 from .FibonacciSearch import FibonacciSearch
 from .GoldenSection import GoldenSection

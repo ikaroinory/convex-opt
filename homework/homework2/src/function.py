@@ -1,5 +1,3 @@
-from typing import Callable
-
 import torch
 
 
@@ -17,14 +15,28 @@ def f1_grad(data: torch.Tensor) -> torch.Tensor:
     return torch.stack([1 + 4 * x + 2 * y, -1 + 2 * x + 2 * y], dim=-1)
 
 
-def f2a(x: torch.Tensor) -> torch.Tensor:
+def f2a(data: torch.Tensor) -> torch.Tensor:
+    x = data[..., 0]
+
     return 2 * x ** 2 - x - 1
 
 
-f2a_grad: Callable[[torch.Tensor], torch.Tensor] = lambda x: 4 * x - 1
+def f2a_grad(data: torch.Tensor) -> torch.Tensor:
+    x = data[..., 0]
 
-f2b: Callable[[torch.Tensor], torch.Tensor] = lambda x: 3 * x[..., 0] ** 2 - 21.6 * x[..., 0] - 1
-f2b_grad: Callable[[torch.Tensor], torch.Tensor] = lambda x: 6 * x[..., 0] - 21.6
+    return 4 * x - 1
+
+
+def f2b(data: torch.Tensor) -> torch.Tensor:
+    x = data[..., 0]
+
+    return 3 * x ** 2 - 21.6 * x - 1
+
+
+def f2b_grad(data: torch.Tensor) -> torch.Tensor:
+    x = data[..., 0]
+
+    return 6 * x - 21.6
 
 
 def f3(data: torch.Tensor) -> torch.Tensor:
