@@ -8,15 +8,12 @@ class Optimizer:
         self,
         f: Callable[[torch.Tensor], torch.Tensor],
         grad_f: Callable[[torch.Tensor], torch.Tensor] = None,
-        epsilon=1e-6,
-        max_iter=100
+        epsilon=None,
+        max_iter=None
     ):
         self.f = f
         self.grad_f = grad_f
-        self.epsilon = epsilon
-        self.max_iter = max_iter
+        self.epsilon = epsilon if epsilon is not None else 1e-6
+        self.max_iter = max_iter if max_iter is not None else 100
 
         self.iterator_count = 0
-
-    def __call__(self, *args, **kwargs):
-        pass
