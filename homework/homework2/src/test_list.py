@@ -2,7 +2,7 @@ import torch
 
 from function import f1, f1_grad, f2a, f2a_grad, f2b, f2b_grad
 from functions import bohachevsky, bohachevsky_grad
-from optimizer import BisectionSearch, ConjugateGradient, FibonacciSearch, GoldenSearch
+from optimizer import BisectionSearch, ConjugateGradient, FibonacciSearch, GoldenSearch, ShubertPiyavskiiSearch
 
 test_list = [
     [
@@ -36,17 +36,22 @@ test_list = [
         {
             'optimizer': GoldenSearch,
             'init': {'f': f2b, 'epsilon': 0.08},
-            'call': {'alpha': torch.tensor([-1]).double(), 'beta': torch.tensor([1]).double()}
+            'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
         },
         {
             'optimizer': FibonacciSearch,
             'init': {'f': f2b, 'epsilon': 0.08},
-            'call': {'alpha': torch.tensor([-1]).double(), 'beta': torch.tensor([1]).double()}
+            'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
         },
         {
             'optimizer': BisectionSearch,
             'init': {'f': f2b, 'f_grad': f2b_grad, 'epsilon': 0.08},
-            'call': {'alpha': torch.tensor([-1]).double(), 'beta': torch.tensor([1]).double()}
-        }
+            'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
+        },
+        # {
+        #     'optimizer': ShubertPiyavskiiSearch,
+        #     'init': {'f': f2b, 'l': 0.08},
+        #     'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
+        # }
     ]
 ]
