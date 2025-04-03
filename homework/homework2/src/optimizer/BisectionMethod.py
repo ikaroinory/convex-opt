@@ -4,7 +4,7 @@ from optimizer.Optimizer import Optimizer
 
 
 class BisectionMethod(Optimizer):
-    def __init__(self, f, f_grad=None, epsilon=1e-6):
+    def __init__(self, f, f_grad=None, epsilon=None):
         super(BisectionMethod, self).__init__(f, f_grad, epsilon=epsilon)
 
     def optimize(self, alpha: torch.Tensor, beta: torch.Tensor) -> torch.Tensor:

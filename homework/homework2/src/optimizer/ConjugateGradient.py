@@ -4,8 +4,8 @@ from optimizer.Optimizer import Optimizer
 
 
 class ConjugateGradient(Optimizer):
-    def __init__(self, f, grad_f, method='PR'):
-        super(ConjugateGradient, self).__init__(f, grad_f)
+    def __init__(self, f, grad_f, method='PR', epsilon=None, max_iter=None):
+        super(ConjugateGradient, self).__init__(f, grad_f, epsilon=epsilon, max_iter=max_iter)
 
         self.method = method
 
@@ -31,16 +31,15 @@ class ConjugateGradient(Optimizer):
             alpha *= rho
         return alpha
 
-    def optimize(self, x0: torch.Tensor, max_iter=100, epsilon=1e-6):
+    def optimize(self, x0: torch.Tensor):
         x = x0
         grad = self.grad_f(x)
         d = -grad
 
-        for _ in range(max_iter):
-            if torch.norm(grad, p=2) < epsilon:
+        for _ in range(self.max_iter):
+            if torch.norm(grad, p=2) < self.epsilon:
                 break
 
-            # alpha = 1e-3
             alpha = self.__armijo_line_search(self.f, self.grad_f, x, d)
 
             x = x + alpha * d
