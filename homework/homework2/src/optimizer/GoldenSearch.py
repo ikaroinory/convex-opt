@@ -3,9 +3,9 @@ import torch
 from optimizer.Optimizer import Optimizer
 
 
-class GoldenSection(Optimizer):
+class GoldenSearch(Optimizer):
     def __init__(self, f, epsilon=None):
-        super(GoldenSection, self).__init__(f, epsilon=epsilon)
+        super(GoldenSearch, self).__init__(f, epsilon=epsilon)
 
     def optimize(self, alpha: torch.Tensor, beta: torch.Tensor) -> torch.Tensor:
         t = (torch.sqrt(torch.tensor(5)) - 1) / 2

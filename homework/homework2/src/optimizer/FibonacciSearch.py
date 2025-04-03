@@ -27,5 +27,6 @@ class FibonacciSearch(Optimizer):
                 beta = right
 
             n -= 1
+            self.iterator_count += 1
 
         return (alpha + beta) / 2

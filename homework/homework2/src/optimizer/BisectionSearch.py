@@ -3,9 +3,9 @@ import torch
 from optimizer.Optimizer import Optimizer
 
 
-class BisectionMethod(Optimizer):
+class BisectionSearch(Optimizer):
     def __init__(self, f, f_grad=None, epsilon=None):
-        super(BisectionMethod, self).__init__(f, f_grad, epsilon=epsilon)
+        super(BisectionSearch, self).__init__(f, f_grad, epsilon=epsilon)
 
     def optimize(self, alpha: torch.Tensor, beta: torch.Tensor) -> torch.Tensor:
         while beta - alpha >= self.epsilon:

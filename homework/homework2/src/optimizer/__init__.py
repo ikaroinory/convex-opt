@@ -1,5 +1,5 @@
-from .BisectionMethod import BisectionMethod
+from .BisectionSearch import BisectionSearch
 from .ConjugateGradient import ConjugateGradient
 from .FibonacciSearch import FibonacciSearch
-from .GoldenSection import GoldenSection
+from .GoldenSearch import GoldenSearch
 from .Optimizer import Optimizer
