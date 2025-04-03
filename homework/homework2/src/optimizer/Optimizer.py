@@ -4,7 +4,7 @@ import torch
 
 
 class Optimizer:
-    def __init__(self, f: Callable[[torch.Tensor], torch.Tensor], grad_f: Callable[[torch.Tensor], torch.Tensor]):
+    def __init__(self, f: Callable[[torch.Tensor], torch.Tensor], grad_f: Callable[[torch.Tensor], torch.Tensor] = None):
         self.f = f
         self.grad_f = grad_f
 
