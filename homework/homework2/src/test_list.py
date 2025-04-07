@@ -1,8 +1,8 @@
 import torch
 
-from function import f1, f1_grad, f2a, f2a_grad, f2b, f2b_grad
+from function import f1, f1_grad, f2a, f2a_grad, f2b, f2b_grad, f3, f3_grad
 from functions import bohachevsky, bohachevsky_grad
-from optimizer import BisectionSearch, ConjugateGradient, FibonacciSearch, GoldenSearch, ShubertPiyavskiiSearch
+from optimizer import Armijo, BisectionSearch, ConjugateGradient, FibonacciSearch, GoldenSearch, ShubertPiyavskiiSearch
 
 test_list = [
     [
@@ -58,5 +58,13 @@ test_list = [
             'init': {'f': f2b, 'l': 5, 'epsilon': 0.08},
             'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
         }
+    ],
+    [
+        {
+            'optimizer': Armijo,
+            'init': {'f': f3, 'f_grad': f3_grad, 'x0': torch.tensor([[-1, 1]]).double(), 'd0': torch.tensor([[1, 1]]).double()},
+            'call': {'alpha0': torch.tensor([[1]]).double()},
+            'print_value': False
+        },
     ]
 ]

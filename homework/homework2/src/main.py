@@ -12,5 +12,5 @@ if __name__ == '__main__':
             optimizer = i['optimizer'](**i['init'])
             x_star = optimizer.optimize(**i['call'])
 
-            print_solution_information(optimizer, x_star)
+            print_solution_information(optimizer, x_star, i.get('print_value', True))
         print('-' * 64)
