@@ -1,1 +1,52 @@
 \section*{9}
+
+无约束优化问题形式为
+\begin{equation*}
+    \min_{\bm{x}\in\mathbb{R}^n} ~ f(\bm{x}),
+\end{equation*}
+其中$f(\bm{x})$为目标函数, 其定义在整个空间内, 且无其他约束条件.
+
+无约束优化问题的求解通常有两类方法
+\begin{enumerate}
+    \item \textbf{梯度类方法}.
+
+        梯度类方法利用梯度或Hessian矩阵信息, 来选取合适的搜索方向, 即
+        \begin{equation*}
+            \bm{x}^{(k+1)}=\bm{x}^{(k)}+\lambda_k\nabla f\left(\bm{x}^{(k)}\right).
+        \end{equation*}
+        常见的梯度类方法有最速下降法, 牛顿法, 共轭梯度法等.
+
+    \item \textbf{搜索方法}.
+
+        搜索方法不使用任何梯度或Hessian矩阵信息, 直接根据约束在空间中挑选线性无关的方向搜索.
+        常见的搜索方法有模式搜索, Rosenbrock法, 单纯形搜索, Powell方法等.
+\end{enumerate}
+
+求解无约束优化问题通常有两个步骤: 
+\begin{enumerate}
+    \item 确定搜索方向.
+    \item 确定搜索步长.
+\end{enumerate}
+
+非凸优化难以求解, 因此在理论和工程中常希望将其转化为凸问题. 常用方法有:
+\begin{enumerate}
+    \item 松弛.
+
+        将原问题的非凸部分用凸函数近似或放松.
+
+    \item 凸包方法.
+
+    对非凸函数取其最紧凸上界, 构成凸优化问题.
+
+    \item 重参数化或替代变量.
+
+        通过变量替换, 使目标函数或约束变凸.
+
+    \item 局部凸化.
+
+        将非凸函数在某个邻域内近似为凸函数.
+
+    \item 正则化与惩罚项.
+
+    加入凸正则项, 引导目标函数变得更凸.
+\end{enumerate}
