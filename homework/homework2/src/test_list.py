@@ -34,6 +34,11 @@ test_list = [
             'call': {'alpha': torch.tensor([-1]).double(), 'beta': torch.tensor([1]).double()}
         },
         {
+            'optimizer': ShubertPiyavskiiSearch,
+            'init': {'f': f2a, 'l': 5, 'epsilon': 0.06},
+            'call': {'alpha': torch.tensor([-1]).double(), 'beta': torch.tensor([1]).double()}
+        },
+        {
             'optimizer': GoldenSearch,
             'init': {'f': f2b, 'epsilon': 0.08},
             'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
@@ -48,10 +53,10 @@ test_list = [
             'init': {'f': f2b, 'f_grad': f2b_grad, 'epsilon': 0.08},
             'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
         },
-        # {
-        #     'optimizer': ShubertPiyavskiiSearch,
-        #     'init': {'f': f2b, 'l': 0.08},
-        #     'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
-        # }
+        {
+            'optimizer': ShubertPiyavskiiSearch,
+            'init': {'f': f2b, 'l': 5, 'epsilon': 0.08},
+            'call': {'alpha': torch.tensor([0]).double(), 'beta': torch.tensor([25]).double()}
+        }
     ]
 ]

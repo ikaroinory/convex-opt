@@ -1,48 +1,50 @@
-import numpy as np
 import torch
 
 from optimizer import Optimizer
 
 
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
 class ShubertPiyavskiiSearch(Optimizer):
-    def __init__(self, f, l):
-        super(ShubertPiyavskiiSearch, self).__init__(f)
+    def __init__(self, f, l=5, epsilon=None):
+        super(ShubertPiyavskiiSearch, self).__init__(f, epsilon=epsilon)
 
         self.l = l
 
+    def _get_sp_intersection(self, alpha: Point, beta: Point) -> Point:
+        x = ((alpha.y - beta.y) + self.l * (alpha.x + beta.x)) / (2 * self.l)
+        y = alpha.y - self.l * (x - alpha.x)
+
+        return Point(x, y)
+
     def optimize(self, alpha: torch.Tensor, beta: torch.Tensor) -> torch.Tensor:
-        x_samples = torch.tensor([alpha, beta])
-        f_samples = torch.tensor([self.f(alpha), self.f(beta)])
+        mid = (alpha + beta) / 2
+        A, M, B = Point(alpha, self.f(alpha)), Point(mid, self.f(mid)), Point(beta, self.f(beta))
+        pts = [A, self._get_sp_intersection(A, M), M, self._get_sp_intersection(M, B), B]
 
-        for _ in range(self.max_iter):
-            max_lower_bound = np.inf
-            best_x = (alpha + beta) / 2
+        diff = torch.inf
+        while diff > self.epsilon:
+            i = torch.argmin(torch.tensor([P.y for P in pts if P.x not in [alpha, mid, beta]]))
+            P = Point(pts[i].x, self.f(pts[i].x))
 
-            for i in range(len(x_samples) - 1):
-                x_left, x_right = x_samples[i], x_samples[i + 1]
-                f_left, f_right = f_samples[i], f_samples[i + 1]
+            diff = P.y - pts[i].y
 
-                # 计算可能的最优插入点
-                x_new = (x_left + x_right) / 2 - (f_right - f_left) / (2 * self.l)
+            P_prev = self._get_sp_intersection(pts[i - 1], P)
+            P_next = self._get_sp_intersection(P, pts[i + 1])
 
-                # 计算下界函数的值
-                g_x_new = torch.min(f_samples - self.l * torch.abs(x_samples - x_new))
+            if (P_next.x - P_prev.x) < self.epsilon:
+                return P.x
 
-                if g_x_new > max_lower_bound:
-                    max_lower_bound = g_x_new
-                    best_x = x_new
+            del pts[i]
 
-            # 计算新点的目标函数值
-            f_new = self.f(best_x)
+            pts.insert(i, P_next)
+            pts.insert(i, P)
+            pts.insert(i, P_prev)
 
-            # 更新采样点
-            x_samples = torch.cat([x_samples, torch.tensor([best_x], dtype=torch.float32)])
-            f_samples = torch.cat([f_samples, torch.tensor([f_new], dtype=torch.float32)])
+            self.iterator_count += 1
 
-            # 重新排序
-            sorted_indices = torch.argsort(x_samples)
-            x_samples = x_samples[sorted_indices]
-            f_samples = f_samples[sorted_indices]
-
-        min_idx = torch.argmin(f_samples)
-        return torch.tensor(x_samples[min_idx])
+        return None
