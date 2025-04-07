@@ -1,1 +1,30 @@
 \section*{10}
+
+最速下降法, Newton法, 修正Newton法的计算公式可以统一描述为
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\lambda_k\bm{H}_k\nabla f(\bm{x}_k),
+\end{equation*}
+其中, $\lambda_k$为迭代步长, $\bm{H}_k$为正定对称矩阵.
+
+最速下降法, Newton法, 修正Newton法的不同点在于:
+\begin{itemize}
+    \item 最速下降法: $\bm{H}_k=\bm{I}$, 即
+        \begin{equation*}
+            \bm{x}_{k+1}=\bm{x}_k-\lambda_k\nabla f(\bm{x}_k).
+        \end{equation*}
+        最速下降法收敛速度慢, 易出现锯齿形路径, 尤其在等高线椭圆扁长时.
+
+    \item Newton法: $\bm{H}_k=\left[\nabla^2 f(\bm{x}_k)\right]^{-1}$, 即
+        \begin{equation*}
+            \bm{x}_{k+1}=\bm{x}_k-\lambda_k\left[\nabla^2 f(\bm{x}_k)\right]^{-1}\nabla f(\bm{x}_k).
+        \end{equation*}
+        Newton法使用了二阶信息, 因此收敛速度快, 但Hessian矩阵计算复杂, 且可能不可逆或非正定.
+
+    \item 修正Newton法: $\bm{B}_k\approx\nabla^2 f(\bm{x}_k)$, 即
+        \begin{equation*}
+            \bm{x}_{k+1}=\bm{x}_k-\lambda_k\bm{B}_k^{-1}\nabla f(\bm{x}_k).
+        \end{equation*}
+        修正Newton法避免直接计算Hessian矩阵, 且收敛速度接近牛顿法, 计算开销远小于牛顿法.
+\end{itemize}
+
+变尺度法的核心思想为: 不断调整目标函数的度量方式, 改变梯度方向的尺度或几何结构, 以更快地逼近最优解.
