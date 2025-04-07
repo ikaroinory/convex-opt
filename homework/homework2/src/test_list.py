@@ -2,7 +2,7 @@ import torch
 
 from function import f1, f1_grad, f2a, f2a_grad, f2b, f2b_grad, f3, f3_grad
 from functions import bohachevsky, bohachevsky_grad
-from optimizer import Armijo, BisectionSearch, ConjugateGradient, FibonacciSearch, GoldenSearch, ShubertPiyavskiiSearch
+from optimizer import Armijo, BisectionSearch, ConjugateGradient, FibonacciSearch, GoldenSearch, Goldstein, ShubertPiyavskiiSearch
 
 test_list = [
     [
@@ -60,6 +60,12 @@ test_list = [
         }
     ],
     [
+        {
+            'optimizer': Goldstein,
+            'init': {'f': f3, 'f_grad': f3_grad, 'x0': torch.tensor([[-1, 1]]).double(), 'd0': torch.tensor([[1, 1]]).double()},
+            'call': {'alpha0': torch.tensor([[1]]).double()},
+            'print_value': False
+        },
         {
             'optimizer': Armijo,
             'init': {'f': f3, 'f_grad': f3_grad, 'x0': torch.tensor([[-1, 1]]).double(), 'd0': torch.tensor([[1, 1]]).double()},

@@ -12,7 +12,9 @@ class Armijo(Optimizer):
 
     def optimize(self, alpha0):
         alpha = alpha0
-        while self.f(self.x0 + alpha * self.d0) > self.f(self.x0) + self.rho * alpha * self.grad_f(self.x0) @ self.d0.T:
+        while True:
+            if self.f(self.x0 + alpha * self.d0) <= self.f(self.x0) + self.rho * alpha * self.grad_f(self.x0) @ self.d0.T:
+                break
             alpha *= self.rho
 
             self.iterator_count += 1
