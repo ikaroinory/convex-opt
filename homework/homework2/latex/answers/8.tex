@@ -1,1 +1,69 @@
 \section*{8}
+
+\begin{enumerate}
+    \item
+        考虑凸函数$f(\bm{x})$一阶连续可导, 假设其梯度Lipschitz连续, 即
+        \begin{equation*}
+            \|\nabla f(\bm{y})-\nabla f(\bm{x})\|\leq L\|\bm{y}-\bm{x}\|,\quad \forall\bm{x},\bm{y}\in\mathbb{R}^n.
+        \end{equation*}
+        设梯度下降法迭代形式为
+        \begin{equation*}
+            \bm{x}_{k+1}=\bm{x}_k-\lambda\nabla f(\bm{x}_k),\quad \lambda_k\in\left(0,\frac{2}{L}\right),
+        \end{equation*}
+        则有
+        \begin{equation*}
+            f(\bm{x}_{k+1})\leq f(\bm{x}_k)-\frac{\lambda_k}{2}\|\nabla f(\bm{x}_k)\|^2,
+        \end{equation*}
+        由此得出梯度下降法是单调下降的, 且目标函数值逐步趋于最小值.
+        进一步地, 如果$f(\bm{x})$是强凸的, 则可得线性收敛率
+        \begin{equation*}
+            \|\bm{x}_k-\bm{x}^*\|\leq C\rho^k,\quad \rho\in(0,1).
+        \end{equation*}
+
+    \item
+        设$f(\bm{x})$在最优点附近二阶可导且Hessian矩阵正定. 由Newton法迭代公式
+        \begin{equation*}
+            \bm{x}_{k+1}=\bm{x}_k-\lambda_k\left[\nabla^2 f(\bm{x}_k)\right]^{-1}\nabla f(\bm{x}_k)
+        \end{equation*}
+        得到, 在最优点$\bm{x}^*$附近, 若满足
+        \begin{equation*}
+            \begin{cases}
+                \nabla f(\bm{x}^*)=\bm{0}, \\
+                \nabla^2f(\bm{x}^*)>\bm{0}, \\
+                \text{Hessian连续},
+            \end{cases}
+        \end{equation*}
+        则容易证明
+        \begin{equation*}
+            \|\bm{x}_{k+1}-\bm{x}^*\|\leq C\|\bm{x}_k-\bm{x}^*\|^2.
+        \end{equation*}
+        即牛顿法具有二次收敛速度.
+
+    \item
+        设目标函数为
+        \begin{equation*}
+            \min_{\bm{x}}~f(\bm{x})=\frac{1}{2}\bm{x}^\mathrm{T}\bm{Qx}+\bm{c}^\mathrm{T}\bm{x},
+        \end{equation*}
+        其中矩阵$\bm{Q}$正定, 且梯度
+        \begin{equation*}
+            \nabla f(\bm{x})=\bm{Qx}+\bm{c}.
+        \end{equation*}
+        使用梯度下降法, 有
+        \begin{equation*}
+            \bm{x}_{k+1}=\bm{x}_k-\lambda_k(\bm{Qx}_k+\bm{c}).
+        \end{equation*}
+        设最优解为$\bm{x}^*$, 且满足$\bm{Qx}^*+\bm{c}=\bm{0}$, 解得$\bm{x}^*=-\bm{Q}^{-1}\bm{c}$.
+        定义误差$\bm{e}_k=\bm{x}_k-\bm{x}^*$, 则有
+        \begin{align*}
+            \bm{e}_{k+1}
+            &=\bm{x}_{k+1}-\bm{x}^* \\
+            &=\bm{x}_k-\lambda_k(\bm{Qx}_k+\bm{c})-\bm{x}^* \\
+            &=\bm{e}_k-\lambda_k\bm{Qe}_k \\
+            &=(\bm{I}-\lambda_k\bm{Q})\bm{e}_k,
+        \end{align*}
+        于是
+        \begin{equation*}
+            \bm{e}_k=(\bm{I}-\lambda_k\bm{Q})^k\bm{e_0}.
+        \end{equation*}
+        因此, 只要选择合适的$\lambda_k$, 则收敛因子$\|\bm{I}-\lambda_k\bm{Q}\|<1$, 从而保证梯度下降线性收敛.
+\end{enumerate}
