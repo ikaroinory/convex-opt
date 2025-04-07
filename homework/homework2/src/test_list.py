@@ -35,7 +35,7 @@ test_list = [
         },
         {
             'optimizer': ShubertPiyavskiiSearch,
-            'init': {'f': f2a, 'l': 5, 'epsilon': 0.06},
+            'init': {'f': f2a, 'l': 2, 'epsilon': 0.06},
             'call': {'alpha': torch.tensor([-1]).double(), 'beta': torch.tensor([1]).double()}
         },
         {
