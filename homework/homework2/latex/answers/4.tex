@@ -1,1 +1,32 @@
 \section*{4}
+
+\begin{enumerate}[label=(\arabic*)]
+    \item
+        \begin{align*}
+            \partial f(\bm{0})
+            &=\left\{ \bm{g}\in\mathbb{R}^3 ~ \left| ~ f(\bm{x}) \geq f(\bm{0})+\bm{g}^\mathrm{T}\bm{x}, ~ f(\bm{x})=\max\{|\bm{x}|\} \right.\right\} \\
+            &=\left\{ \bm{g}\in\mathbb{R}^3 ~ \left| ~ \max\{|\bm{x}|\} \geq\bm{g}^\mathrm{T}\bm{x} \right.\right\} \\
+            &=\left\{ \bm{g}\in\mathbb{R}^3 ~ \left| ~ \|\bm{g}\|_1 \leq(1,1,1)^\mathrm{T} \right.\right\}.
+        \end{align*}
+
+    \item
+        \begin{align*}
+            \partial f(0)
+            &= \left\{ g\in\mathbb{R} ~ | ~ f(x) \geq f(0)+gx, ~ f(x)=\mathrm{e}^{|x|} \right\} \\
+            &=\left\{ g\in\mathbb{R} ~ | ~ \mathrm{e}^{|x|} \geq 1+gx \right\} \\
+            &=[-1,1].
+        \end{align*}
+
+    \item
+        \begin{equation*}
+            \partial f(\bm{x}_0)
+            =\left\{ \bm{g}\in\mathbb{R}^2 ~ \left| ~ f(\bm{x}) \geq f(\bm{x}_0)+\bm{g}^\mathrm{T}\bm{x}, ~ f(\bm{x})=\max\{f_1(\bm{x}), f_2(\bm{x})\} \right.\right\},
+        \end{equation*}
+        其中$\bm{x}_0=(1,1)$, $f_1(\bm{x})=x_1+x_2-1, f_2(\bm{x})=x_1-x_2+1$.
+        由Finite pointwise maximum可知,
+        \begin{equation*}
+            \partial f(\bm{x}_0)
+            =\mathrm{conv}\left\{\bigcup_{i\in\{i|f_i(\bm{x_0})=f(\bm{x_0})\}}\partial f_i(\bm{x}_0)\right\}
+            =\left\{ (1, \lambda)^\mathrm{T} ~ \left| ~ \lambda\in[-1,1] \right.\right\}.
+        \end{equation*}
+\end{enumerate}
