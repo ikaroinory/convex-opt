@@ -1,8 +1,8 @@
 import torch
 
-from function import f1, f1_grad, f2a, f2a_grad, f2b, f2b_grad, f3, f3_grad
+from function import f1, f1_grad, f2a, f2a_grad, f2b, f2b_grad, f3, f3_grad, f5, f5_exact_line_search, f5_grad
 from functions import bohachevsky, bohachevsky_grad
-from optimizer import Armijo, BisectionSearch, ConjugateGradient, FibonacciSearch, GoldenSearch, Goldstein, ImprovedWolfePowell, \
+from optimizer import Armijo, BisectionSearch, ConjugateGradient, DFP, FibonacciSearch, GoldenSearch, Goldstein, ImprovedWolfePowell, \
     ShubertPiyavskiiSearch, \
     WolfePowell
 
@@ -85,6 +85,14 @@ test_list = [
             'init': {'f': f3, 'f_grad': f3_grad, 'x0': torch.tensor([[-1, 1]]).double(), 'd0': torch.tensor([[1, 1]]).double()},
             'call': {'alpha0': torch.tensor([[1]]).double()},
             'print_value': False
+        }
+    ],
+    [],
+    [
+        {
+            'optimizer': DFP,
+            'init': {'f': f5, 'f_grad': f5_grad, 'exact_line_search': f5_exact_line_search, 'H0': torch.eye(2).double()},
+            'call': {'x0': torch.tensor([[0.1, 1]]).double()}
         }
     ]
 ]

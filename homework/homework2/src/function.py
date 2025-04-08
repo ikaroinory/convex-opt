@@ -50,7 +50,31 @@ def f3_grad(data: torch.Tensor) -> torch.Tensor:
     x = data[..., 0]
     y = data[..., 1]
 
-    grad_x = -400 * x * (y - x ** 2) - 2 * (1 - x)
-    grad_y = 200 * (y - x ** 2)
+    x_grad = -400 * x * (y - x ** 2) - 2 * (1 - x)
+    y_grad = 200 * (y - x ** 2)
 
-    return torch.stack([grad_x, grad_y], dim=-1)
+    return torch.stack([x_grad, y_grad], dim=-1)
+
+
+def f5(data: torch.Tensor) -> torch.Tensor:
+    x = data[..., 0]
+    y = data[..., 1]
+
+    return 10 * x ** 2 + y ** 2
+
+
+def f5_grad(data: torch.Tensor) -> torch.Tensor:
+    x = data[..., 0]
+    y = data[..., 1]
+
+    return torch.stack([20 * x, 2 * y], dim=-1)
+
+
+def f5_exact_line_search(x: torch.Tensor, d: torch.Tensor) -> torch.Tensor:
+    x0 = x[..., 0]
+    x1 = x[..., 1]
+
+    d0 = d[..., 0]
+    d1 = d[..., 1]
+
+    return -(10 * x0 * d0 + x1 * d1) / (10 * d0 ** 2 + d1 ** 2)

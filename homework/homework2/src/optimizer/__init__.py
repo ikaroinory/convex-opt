@@ -1,6 +1,7 @@
 from .Armijo import Armijo
 from .BisectionSearch import BisectionSearch
 from .ConjugateGradient import ConjugateGradient
+from .DFP import DFP
 from .FibonacciSearch import FibonacciSearch
 from .GoldenSearch import GoldenSearch
 from .Goldstein import Goldstein
