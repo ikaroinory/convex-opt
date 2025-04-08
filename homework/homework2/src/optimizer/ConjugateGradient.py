@@ -1,5 +1,6 @@
 import torch
 
+from optimizer import Armijo
 from optimizer.Optimizer import Optimizer
 
 
@@ -24,13 +25,6 @@ class ConjugateGradient(Optimizer):
         if self.method == 'PR':
             return self.__polak_ribiere
 
-    @staticmethod
-    def __armijo_line_search(f, grad_f, x, d, alpha0=1.0, c1=1e-4, rho=0.5):
-        alpha = alpha0
-        while f(x + alpha * d) > f(x) + c1 * alpha * grad_f(x) @ d.T:
-            alpha *= rho
-        return alpha
-
     def optimize(self, x0: torch.Tensor):
         x = x0
         grad = self.grad_f(x)
@@ -40,7 +34,8 @@ class ConjugateGradient(Optimizer):
             if torch.norm(grad, p=2) < self.epsilon:
                 break
 
-            alpha = self.__armijo_line_search(self.f, self.grad_f, x, d)
+            optimizer = Armijo(self.f, self.grad_f, x, d)
+            alpha = optimizer.optimize(torch.tensor([1], dtype=x.dtype, device=x.device))
 
             x = x + alpha * d
             grad_new = self.grad_f(x)
