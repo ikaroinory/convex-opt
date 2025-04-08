@@ -1,9 +1,9 @@
 from optimizer.Optimizer import Optimizer
 
 
-class Armijo(Optimizer):
+class WolfePowell(Optimizer):
     def __init__(self, f, f_grad, x0, d0, rho=None, gamma=None):
-        super(Armijo, self).__init__(f, f_grad)
+        super(WolfePowell, self).__init__(f, f_grad)
 
         self.x0 = x0
         self.d0 = d0
@@ -16,8 +16,4 @@ class Armijo(Optimizer):
         while True:
             if self.f(self.x0 + alpha * self.d0) <= self.f(self.x0) + self.rho * alpha * self.grad_f(self.x0) @ self.d0.T:
                 break
-            alpha *= self.gamma
-
-            self.iterator_count += 1
-
-        return alpha
+            if
