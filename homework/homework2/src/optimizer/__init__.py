@@ -4,5 +4,7 @@ from .ConjugateGradient import ConjugateGradient
 from .FibonacciSearch import FibonacciSearch
 from .GoldenSearch import GoldenSearch
 from .Goldstein import Goldstein
+from .ImprovedWolfePowell import ImprovedWolfePowell
 from .Optimizer import Optimizer
 from .ShubertPiyavskiiSearch import ShubertPiyavskiiSearch
+from .WolfePowell import WolfePowell
