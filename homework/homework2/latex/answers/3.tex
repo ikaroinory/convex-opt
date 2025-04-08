@@ -1,1 +1,24 @@
 \section*{3}
+
+分别使用Goldstein法, Armijo法, Wolfe-Powell法及改进Wolfe-Powell法求解
+\begin{equation}
+    \min_\lambda ~ f(\bm{x}+\lambda\bm{d}),
+    \label{equation:3}
+\end{equation}
+其中$f(\bm{x})=100(x_2-x_1^2)^2+(1-x_1)^2$, 结果见\cref{table:3}所示.
+
+\begin{table}[ht]
+    \centering
+    \caption{不同方法求解\cref{equation:3}的结果}
+    \label{table:3}
+    \begin{tabular}{ccc}
+        \toprule
+        方法 & 最优解 & 迭代轮次 \\
+        \midrule
+        Goldstein & 0.0042 & 52 \\
+        Armijo & 0.0039 & 8 \\
+        WolfePowell & 0.0001 & 13 \\
+        Improved WolfePowell & 0.0020 & 9 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
