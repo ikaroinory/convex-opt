@@ -2,9 +2,17 @@ import torch
 
 from function import f1, f1_grad, f2a, f2a_grad, f2b, f2b_grad, f3, f3_grad, f5, f5_exact_line_search, f5_grad
 from functions import bohachevsky, bohachevsky_grad
-from optimizer import Armijo, BisectionSearch, ConjugateGradient, DFP, FibonacciSearch, GoldenSearch, Goldstein, ImprovedWolfePowell, \
-    ShubertPiyavskiiSearch, \
+from optimizer import (
+    Armijo,
+    BisectionSearch,
+    ConjugateGradient,
+    DFP, FibonacciSearch,
+    GoldenSearch,
+    Goldstein,
+    ImprovedWolfePowell,
+    ShubertPiyavskiiSearch,
     WolfePowell
+)
 
 test_list = [
     [
