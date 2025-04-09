@@ -1,4 +1,5 @@
 from .Armijo import Armijo
+from .BFGS import BFGS
 from .BisectionSearch import BisectionSearch
 from .ConjugateGradient import ConjugateGradient
 from .DFP import DFP

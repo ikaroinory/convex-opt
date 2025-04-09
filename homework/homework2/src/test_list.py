@@ -1,9 +1,16 @@
 import torch
 
-from function import f1, f1_grad, f2a, f2a_grad, f2b, f2b_grad, f3, f3_grad, f5, f5_exact_line_search, f5_grad
+from function import (
+    f1, f1_grad,
+    f2a, f2a_grad, f2b, f2b_grad,
+    f3, f3_grad,
+    f5, f5_exact_line_search, f5_grad,
+    f6, f6_exact_line_search, f6_grad
+)
 from functions import bohachevsky, bohachevsky_grad
 from optimizer import (
     Armijo,
+    BFGS,
     BisectionSearch,
     ConjugateGradient,
     DFP, FibonacciSearch,
@@ -101,6 +108,13 @@ test_list = [
             'optimizer': DFP,
             'init': {'f': f5, 'f_grad': f5_grad, 'exact_line_search': f5_exact_line_search, 'H0': torch.eye(2).double()},
             'call': {'x0': torch.tensor([[0.1, 1]]).double()}
+        }
+    ],
+    [
+        {
+            'optimizer': BFGS,
+            'init': {'f': f6, 'f_grad': f6_grad, 'exact_line_search': f6_exact_line_search, 'H0': torch.eye(2).double()},
+            'call': {'x0': torch.tensor([[0, 0]]).double()}
         }
     ]
 ]

@@ -78,3 +78,27 @@ def f5_exact_line_search(x: torch.Tensor, d: torch.Tensor) -> torch.Tensor:
     d1 = d[..., 1]
 
     return -(10 * x0 * d0 + x1 * d1) / (10 * d0 ** 2 + d1 ** 2)
+
+
+def f6(data: torch.Tensor) -> torch.Tensor:
+    x = data[..., 0]
+    y = data[..., 1]
+
+    return x ** 2 + 4 * y ** 2 - 4 * x - 8 * y
+
+
+def f6_grad(data: torch.Tensor) -> torch.Tensor:
+    x = data[..., 0]
+    y = data[..., 1]
+
+    return torch.stack([2 * x - 4, 8 * y - 8], dim=-1)
+
+
+def f6_exact_line_search(x: torch.Tensor, d: torch.Tensor) -> torch.Tensor:
+    x1 = x[..., 0]
+    x2 = x[..., 1]
+
+    d1 = d[..., 0]
+    d2 = d[..., 1]
+
+    return -(d1 * x1 + 4 * d2 * x2 - 2 * d1 - 4 * d2) / (d1 ** 2 + 4 * d2 ** 2 + 1e-6)
