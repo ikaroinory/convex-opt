@@ -5,10 +5,11 @@ from optimizer.Optimizer import Optimizer
 
 
 class ConjugateGradient(Optimizer):
-    def __init__(self, f, grad_f, method='PR', epsilon=None, max_iter=None):
+    def __init__(self, f, grad_f, exact_line_search=None, method='PR', epsilon=None, max_iter=None):
         super(ConjugateGradient, self).__init__(f, grad_f, epsilon=epsilon, max_iter=max_iter)
 
         self.method = method
+        self.exact_line_search = exact_line_search
 
     @staticmethod
     def __fletcher_reeves(grad_old: torch.Tensor, grad_new: torch.Tensor) -> torch.Tensor:
@@ -31,11 +32,14 @@ class ConjugateGradient(Optimizer):
         d = -grad
 
         for _ in range(self.max_iter):
-            if torch.norm(grad, p=2) < self.epsilon:
+            if torch.norm(grad) < self.epsilon:
                 break
 
-            optimizer = Armijo(self.f, self.grad_f, x, d)
-            alpha = optimizer.optimize(torch.tensor([1], dtype=x.dtype, device=x.device))
+            if self.exact_line_search is None:
+                optimizer = Armijo(self.f, self.grad_f, x, d)
+                alpha = optimizer.optimize(torch.tensor([1], dtype=x.dtype, device=x.device))
+            else:
+                alpha = self.exact_line_search(x, d)
 
             x = x + alpha * d
             grad_new = self.grad_f(x)

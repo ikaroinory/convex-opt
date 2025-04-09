@@ -5,7 +5,8 @@ from function import (
     f2a, f2a_grad, f2b, f2b_grad,
     f3, f3_grad,
     f5, f5_exact_line_search, f5_grad,
-    f6, f6_exact_line_search, f6_grad
+    f6, f6_exact_line_search, f6_grad,
+    f7, f7_exact_line_search, f7_grad
 )
 from functions import bohachevsky, bohachevsky_grad
 from optimizer import (
@@ -114,6 +115,23 @@ test_list = [
         {
             'optimizer': BFGS,
             'init': {'f': f6, 'f_grad': f6_grad, 'exact_line_search': f6_exact_line_search, 'H0': torch.eye(2).double()},
+            'call': {'x0': torch.tensor([[0, 0]]).double()}
+        }
+    ],
+    [
+        {
+            'optimizer': DFP,
+            'init': {'f': f7, 'f_grad': f7_grad, 'exact_line_search': f7_exact_line_search, 'H0': torch.eye(2).double(), 'max_iter': 100},
+            'call': {'x0': torch.tensor([[0, 0]]).double()}
+        },
+        {
+            'optimizer': BFGS,
+            'init': {'f': f7, 'f_grad': f7_grad, 'exact_line_search': f7_exact_line_search, 'H0': torch.eye(2).double(), 'max_iter': 100},
+            'call': {'x0': torch.tensor([[0, 0]]).double()}
+        },
+        {
+            'optimizer': ConjugateGradient,
+            'init': {'f': f7, 'grad_f': f7_grad, 'exact_line_search': f7_exact_line_search, 'method': 'FR', 'max_iter': 2},
             'call': {'x0': torch.tensor([[0, 0]]).double()}
         }
     ]

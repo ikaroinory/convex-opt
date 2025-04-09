@@ -4,8 +4,8 @@ from .Optimizer import Optimizer
 
 
 class BFGS(Optimizer):
-    def __init__(self, f, f_grad, exact_line_search, H0):
-        super(BFGS, self).__init__(f, f_grad)
+    def __init__(self, f, f_grad, exact_line_search, H0, max_iter=None):
+        super(BFGS, self).__init__(f, f_grad, max_iter)
 
         self.H0 = H0
         self.exact_line_search = exact_line_search

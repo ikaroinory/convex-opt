@@ -1,1 +1,23 @@
 \section*{7}
+
+分别使用DFP法, BFGS法和共轭梯度法(FR)求解
+\begin{equation}
+    \min_{x_1,x_2} ~ x_1^2+x_2^2-x_1x_2-10x_1-4x_2+60,
+    \label{equation:7}
+\end{equation}
+结果见\cref{table:7}.
+
+\begin{table}[ht]
+    \centering
+    \caption{不同方法求解\cref{equation:7}的结果}
+    \label{table:7}
+    \begin{tabular}{cccc}
+        \toprule
+        方法 & 最优解 & 最优值 & 迭代轮次 \\
+        \midrule
+        DFP & $(0, 0)^\mathrm{T}$ & 60 & 0 \\
+        BFGS & $(0, 0)^\mathrm{T}$ & 60 & 0 \\
+        Conjugate Gradient (FR) & $(-0.1014, -0.0405)^\mathrm{T}$ & 61.1836 & 1 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
