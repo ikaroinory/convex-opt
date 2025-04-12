@@ -1,1 +1,50 @@
 \section*{14}
+
+Krylov子空间方法是一类用于求解大型稀疏线性方程组的迭代算法, 其基本思想是利用矩阵和残差向量生成的Krylov子空间, 在该子空间内寻找近似解.
+对于线性系统$\bm{Ax}=\bm{b}$, 从初始残差$\bm{r}_0=\bm{b}-\bm{Ax}_0$出发, 通过不断地计算$\bm{A}$与前一残差的乘积, 生成Krylov子空间
+\begin{equation*}
+    \mathcal{K}_k(\bm{A},\bm{r}_0)=\mathop{\mathrm{span}}\{\bm{r}_0,\bm{Ar}_0,\bm{A^2r}_0,\cdots,\bm{A^{k-1}r}_0\},
+\end{equation*}
+然后在该子空间中寻找使残差最小的近似解.
+
+子空间投影方法在数值线性代数中有广泛应用, 典型的包括:
+\begin{enumerate}
+    \item 求解线性方程组.
+        如共轭梯度法(CG)和广义最小残差法(GMRES), 通过在Krylov子空间中投影, 寻找近似解.
+
+    \item 特征值问题.
+        Lanczos方法和Arnoldi方法通过在Krylov子空间中投影, 逼近矩阵的特征值和特征向量.
+
+    \item 预处理技术.
+        ​在迭代求解过程中, 通过子空间投影构造预处理矩阵, 加速收敛.
+\end{enumerate}
+
+以GMRES方法为例, 考虑线性系统$\bm{Ax}=\bm{b}$, 其中$\bm{A}$为非对称矩阵.
+GMRES通过构造Krylov子空间$\mathcal{K}_k(\bm{A},\bm{r}_0)$, 在其中寻找使残差范数最小的近似解.
+​具体步骤如下:
+\begin{enumerate}
+    \item Arnoldi正交化.
+        生成正交基$(\bm{v}_1, \bm{v}_2, \cdots, \bm{v}_k)$, 将$\bm{A}$在该基下投影为上Hessenberg矩阵$\bm{H}_k$.
+
+    \item 最小化残差.
+        求解最小二乘问题
+        \begin{equation*}
+            \min_{\bm{y}} |\bm{H}_k\bm{y}-\beta\bm{e}_1|,
+        \end{equation*}
+        得到$\bm{y}_k$, 进而计算近似解$\bm{x}_k=\bm{V}_k\bm{y}_k$, 其中$\bm{V}_k=(\bm{v}_1, \bm{v}_2, \cdots, \bm{v}_k)$.
+\end{enumerate}
+在实际应用中, GMRES方法通常表现出良好的收敛性, 特别是对于非对称或非正定矩阵.
+
+GMRES方法与共轭梯度法的比较:
+\begin{enumerate}
+    \item 适用范围:
+        共轭梯度法适用于对称正定矩阵, 而GMRES可处理任意矩阵, 特别是非对称或非正定矩阵.
+
+    \item 存储需求:
+        GMRES需要存储Krylov子空间的全部基向量, 存储需求随迭代次数增加, 可能导致内存问题.
+        共轭梯度法仅需存储少量向量, 存储需求固定.
+
+    \item 收敛性:
+        对于对称正定矩阵, CG方法通常收敛速度快于GMRES.
+        然而, 对于非对称或非正定矩阵, GMRES可能是更合适的选择.
+\end{enumerate}
