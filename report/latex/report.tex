@@ -1,0 +1,52 @@
+\documentclass[reading]{hitrep}
+
+\usepackage{tabularx}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\subject{人工智能原理及应用}
+\department{计算学部}
+\major{计算机技术}
+\author{胡冠宇}
+\studentid{24S103184}
+\studenttype{硕士研究生}
+
+\newcounter{csubsection}
+\NewDocumentCommand\optmodule{sO{}mmm}{%
+    \IfBooleanTF{#1}{%
+        \begin{equation*}
+            \ifthenelse{\equal{#2}{}}{}{(#2)\quad}
+            \begin{aligned}
+                \begin{cases}
+                    #3 \quad & #4 \\
+                    \mathrm{s.t.} \quad #5
+                \end{cases}
+            \end{aligned}
+        \end{equation*}
+    }{%
+        \begin{equation}
+            \ifthenelse{\equal{#2}{}}{}{(#2)\quad}
+            \begin{aligned}
+                \begin{cases}
+                    #3 \quad & #4 \\
+                    \mathrm{s.t.} \quad #5
+                \end{cases}
+            \end{aligned}
+        \end{equation}
+    }%
+}
+
+\begin{document}
+    % \nocite{*}
+
+    \maketitle
+
+    \input{tex/问题介绍.tex}
+    \input{tex/相关求解算法简介及其实现.tex}
+    \input{tex/最新发展、数据集与SOTA结果.tex}
+    \input{tex/结论.tex}
+
+    \stepcounter{section}
+    \renewcommand{\refname}{\chinese{section}、参考文献}
+    \bibliography{references}
+\end{document}
+ 

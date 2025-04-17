@@ -1,0 +1,57 @@
+\section{最新发展、数据集与SOTA结果}
+
+\subsection{MGDN}
+
+近年来，工业控制系统的异常检测研究逐渐从单领域分析转向多模态数据融合。传统方法如基于统计过程控制（SPC）和自回归模型（ARIMA）虽能捕捉单维度异常，但难以应对跨领域攻击（如同时篡改传感器数据与网络流量的协同攻击）。最新进展集中在图神经网络（GNN）与多任务学习的结合上，通过建模设备间的物理拓扑与网络交互关系提升检测能力。
+
+论文采用SWaT（Secure Water Treatment）数据集，该数据集由新加坡理工大学发布，模拟真实水处理系统的运行场景。数据集包含51个物理传感器（如流量计、阀门状态）和16个网络特征（如数据包数量、协议类型），时间跨度为11天，前7天为正常操作，后4天注入36种攻击（包括传感器欺骗、命令注入、网络泛洪等）。例如，攻击A21通过修改化学药剂投加量触发水质异常，而攻击A35则通过高频Modbus请求干扰控制指令。
+实验结果如\cref{table:the accuracy of mgdn and the baseline methods using swat}所示。
+
+\begin{table}[ht]
+    \centering
+    \caption{MGDN与基线方法的准确性（在数据集SWaT下）}
+    \label{table:the accuracy of mgdn and the baseline methods using swat}
+    \begin{tabular}{ccccc}
+        \toprule
+        \textbf{Method} & \textbf{FPR (\%)} & \textbf{Precision (\%)} & \textbf{Recall (\%)} & \textbf{F1 (\%)} \\
+        \midrule
+        DTAAD       & 13.33 & 59.88 & 99.99 & 74.90 \\
+        GDN         & 10.70 & 64.91 & 99.45 & 78.55 \\
+        LSTM-AD     & 13.33 & 59.88 & 99.99 & 74.90 \\
+        MAD-GAN     & 13.57 & 59.45 & 99.99 & 74.57 \\
+        MSCRED      & 13.33 & 59.89 & 99.99 & 74.91 \\
+        MTAD-GAT    & 13.39 & 59.78 & 99.99 & 74.83 \\
+        OmniAnomaly & 13.36 & 59.83 & 99.99 & 74.87 \\
+        TranAD      & 13.35 & 59.85 & 99.99 & 74.88 \\
+        USAD        & 13.26 & 60.02 & 99.99 & 75.01 \\
+        \textbf{MGDN}   & \textbf{3.07} & \textbf{84.65} & \textbf{85.12} & \textbf{84.88} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{MicroDig}
+
+在评估MicroDig的性能时，文章构建了三个数据集，分别是来自腾讯的真实世界性能问题案例（数据集$\mathcal{A}$）、开源微服务系统Train-Ticket中的注入问题（数据集$\mathcal{B}$），以及中国建设银行电子商务系统的模拟问题（数据集$\mathcal{C}$）。这些数据集涵盖了不同规模和类型的微服务系统，为全面评估MicroDig提供了丰富的场景。实验旨在回答三个研究问题：MicroDig的诊断准确性（RQ1）、诊断效率（RQ2）以及核心组件对性能的贡献（RQ3）。
+
+\begin{table}[ht]
+    \centering
+    \caption{MicroDig与基线方法的准确性（在数据集$\mathcal{A}$下）}
+    \label{table:the accuracy of microdig and the baseline methods A}
+    \begin{tabular}{cccccc}
+        \toprule
+        \textbf{Method} & \textbf{AC@1 (\%)} & \textbf{AC@2 (\%)} & \textbf{AC@3 (\%)} & \textbf{Avg@3 (\%)} & \textbf{MRR} \\
+        \midrule
+        ServiceRank         & 50.8 & 55.7 & 57.4 & 54.6 & 0.55 \\
+        MonitorRank         & 49.2 & 61.9 & 71.4 & 60.8 & 0.62 \\
+        TraceRCA            & 61.5 & 72.7 & 75.8 & 70.0 & 0.70 \\
+        TraceRank           & 16.9 & 20.3 & 20.3 & 19.2 & 0.20 \\
+        Microscope          & 50.8 & 70.4 & 75.4 & 65.5 & 0.64 \\
+        MicroHECL           & 61.9 & 73.8 & 76.2 & 70.6 & 0.71 \\
+        \textbf{MicroDig}   & \textbf{64.4} & \textbf{87.3} & \textbf{94.1} & \textbf{81.9} & \textbf{0.78} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+文章选用了Top-$k$准确率（AC@k）、平均Top-$k$准确率（Avg@k）和平均倒数排名（MRR）作为主要的性能评估指标。这些指标能够全面反映MicroDig在定位性能问题根源时的准确性和效率。为了进行公平比较，文章选择了六种具有代表性的基线方法，包括Microscope、ServiceRank、MicroHECL、MonitorRank、TraceRCA和TraceRank，这些方法在各自的领域都展现出了优越的性能。
+
+实验结果表明，MicroDig在所有三个数据集上都显著优于基线方法。如\cref{table:the accuracy of microdig and the baseline methods A}所示，在腾讯的真实世界数据集上，MicroDig在AC@1、AC@2和AC@3上分别比其他方法高出4\%、18.3\%和23.5\%。此外，MicroDig的平均诊断时间最短，为24.72秒/案例，显示出良好的效率。消融实验进一步证实了异构传播图、超参数$\beta$和异常检测对MicroDig性能的显著贡献。
