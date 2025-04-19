@@ -3,7 +3,7 @@ import torch
 from torch import nn
 
 from functions import rosenbrock_banana
-from optimizer import BFGS, ConjugateGradient, GradientDescent, Newton, StochasticGradientDescent, SubgradientDescent
+from optimizer import *
 
 f = lambda x: rosenbrock_banana(x, a=1, b=-100)
 
@@ -27,10 +27,23 @@ task_list = [
         'epochs': 15000
     },
     {
+        'task_name': 'Conjugate Direction',
+        'x': nn.Parameter(torch.tensor([-1.5, 2.])),
+        'optimizer': ConjugateDirection,
+        'args': {
+            'lr': 1e-3,
+            'beta_type': 'FR'
+        },
+        'epochs': 47
+    },
+    {
         'task_name': 'Conjugate Gradient',
         'x': nn.Parameter(torch.tensor([-1.5, 2.])),
         'optimizer': ConjugateGradient,
-        'epochs': 45
+        'args': {
+            'lr': 1e-3
+        },
+        'epochs': 47
     },
     {
         'task_name': 'BFGS',
@@ -56,23 +69,38 @@ task_list = [
         'x': nn.Parameter(torch.tensor([-1.5, 2.])),
         'optimizer': Newton,
         'epochs': 10
+    },
+    {
+        'task_name': 'Damped Newton',
+        'x': nn.Parameter(torch.tensor([-1.5, 2.])),
+        'optimizer': DampedNewton,
+        'args': {
+            'lr': 2,
+            'damping': 2
+        },
+        'epochs': 2000
     }
 ]
 
 for task in task_list:
+    task_name = task['task_name']
     x = task['x']
+    epochs = task['epochs']
+
     optimizer = task['optimizer']([x], **task.get('args', {}))
 
-    for _ in range(task['epochs']):
+    for _ in range(epochs):
         optimizer.zero_grad()
         loss = f(x)
         loss.backward()
         optimizer.step(lambda: f(x))
     optimizer.point_list.append(x.data)
     optimizer.loss_list.append(f(x).item())
-    optimizer.show(task['task_name'])
+    optimizer.show(task_name)
 
     best_point = optimizer.point_list[np.argmin(optimizer.loss_list)]
+
+    print(f'Optimizer: {task_name}')
     print(f'Best point: ({best_point[0]:>7.4f}, {best_point[1]:>7.4f})')
     print(f'Min Value: {np.min(optimizer.loss_list):>6.4f}')
     print(f'Iterator count: {np.argmin(optimizer.loss_list)}')
