@@ -1,0 +1,49 @@
+\section{核心优化思想及其发展历程}
+
+\subsection{优化思想}
+
+为了在多个域（如物理域、网络域等）上同时优化预测性能，文章使用了多任务学习（Multi-Task Learning, MTL）\cite{ruder2017overviewmultitasklearningdeep}方法，其目标是联合优化每个任务的损失
+\begin{equation*}
+    \min_{\bm{W}_s,\bm{W}_1,\bm{W}_2,\cdots,\bm{W}_D}\sum_{d=1}^D\beta_d\mathcal{L}_d(\bm{W}_s,\bm{W}_d) \text{，}
+\end{equation*}
+其中$\bm{W}_s$为共享层参数，$\bm{W}_d$、$\mathcal{L}_d$和$\beta_d$分别为第$d$域的专属参数、损失函数及任务权重。
+
+为了解决梯度冲突问题，引入了多梯度下降算法（Multiple Gradient Descent Algorithm，MGDA）\cite{desideri2012multiple}，其基本思想是寻找一组权重$\{\gamma_d\}$，使得多个损失函数在共享参数$\bm{W}_s$上的梯度方向可以共同优化，即
+\optmodule{\min_{\gamma_1,\gamma_2,\cdots,\gamma_D}}{\left\|\sum_{d=1}^D\gamma_d\nabla_{\bm{W}_s}\mathcal{L}_d(\bm{W}_s,\bm{W}_d)\right\|^2}{
+    &\sum_{d=1}^D\gamma_d=1\text{，} \\
+    &\gamma_1,\gamma_2,\cdots,\gamma_D\geq0\text{，}
+    \label{equation:MGDA}
+}
+该优化问题保证在共享参数更新中不会偏向某一特定任务。
+
+当$D=2$时，\cref{equation:MGDA}简化为
+\optmodule*{\min_{\gamma}}{\left\|\gamma\nabla_{\bm{W}_s}\mathcal{L}_1(\bm{W}_s,\bm{W}_1)+(1-\gamma)\nabla_{\bm{W}_s}\mathcal{L}_2(\bm{W}_s,\bm{W}_2)\right\|^2}{
+    &\gamma\geq0\text{。}
+}
+
+\subsection{MTL的发展历程}
+
+多任务学习的思想可以追溯到上世纪90年代，其中最具代表性的开创性工作来自于Rich Caruana在1997年的论文\cite{caruana1997multitask}。
+这篇文章明确提出了一个基本设想：如果我们同时学习多个相互关联的任务，就可以通过共享表示来提升模型的泛化能力。
+这一时期的多任务学习主要关注于参数共享的形式，也就是通过设计模型结构，让多个任务共享一部分网络参数（例如前几层），而在高层则保留各自的特定参数。
+这样的设计既利用了任务间的相关性，又保留了个性化特征。
+
+随着深度学习的发展，特别是CNN和RNN等结构的广泛应用，多任务学习进入了“深度MTL”时代。
+研究者开始思考不仅仅是共享前几层的问题，而是如何更加灵活地在网络中进行共享。
+例如，Cross-Stitch Networks\cite{misra2016cross}、Sluice Networks\cite{ruder2019latent}等进一步提出了“选择性共享”的策略，即网络的每一层都可以决定是否共享，这种方式使得模型在面对任务相关性强弱不一的场景时具有更大的灵活性。
+
+但是，这一时期很快暴露出一个重要问题：共享结构设计虽然能够在一定程度上提高性能，但很多时候，多任务学习的训练过程并不稳定。
+有时候，模型在优化某个任务时，会影响甚至破坏另一个任务的性能。这种现象在训练过程中表现为任务之间的“负迁移”或“梯度冲突”。
+任务的损失函数虽然在理论上可以共同最小化，但在梯度空间中，它们的方向可能是彼此冲突的。
+这就催生了人们对多任务优化策略本身的深入研究。
+
+真正把这个问题提升到理论高度的是文章\cite{desideri2012multiple,sener2018multi}。
+文章将多任务学习转化为一个经典的多目标优化问题（Multi-objective Optimization, MOO），即在参数空间中同时最小化多个目标函数，而不是对它们进行简单的加权求和。
+他们引入了Pareto最优的概念，认为多任务学习的本质是找到一个所有任务都“无法进一步改善而不损害其他任务”的平衡点。
+
+MGDA 的核心思想是，每次参数更新时都不直接沿着所有梯度简单平均的方向走，而是求解一个最小范数问题，在所有任务的梯度凸包中找到一个合适的组合方向，使得整体更新方向在几何意义上最“中性”、最“折中”。
+这个方向被视为当前任务之间最合理的优化方向，从而避免了梯度冲突的直接影响。
+该方法提出后，迅速成为多任务优化的核心代表方法之一。
+
+到今天，多任务学习已经不再只是“如何共享参数”这样一个模型结构设计问题，更是一个“如何优化更新”的动态策略问题。
+MGDA作为第一个明确从优化角度重新定义MTL训练流程的方法，为后续梯度调度类方法打开了方向，构建了以“Pareto最优”为核心思想的全新视角。

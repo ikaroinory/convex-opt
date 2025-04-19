@@ -1,0 +1,71 @@
+\section{实验设置、数据集及结果分析}
+
+文章使用SWaT（Secure Water Treatment）\cite{mathur2016swat}数据集进行实验。
+该数据集由新加坡科技设计大学（Singapore University of Technology and Design，SUTD）网络安全研究中心的iTrust实验室发布，模拟了真实水处理系统的运行场景。
+数据集包含51个物理传感器（如流量计、阀门状态）和16个网络特征（如数据包数量、协议类型），时间跨度为11天，前7天为正常操作，后4天注入41种攻击。
+\cref{table:swat static info}总结了SWaT数据集在物理和网络领域的统计数据。
+
+文章使用准确率（Precision）、召回率（Recall）、假阳性率（False Positive Rate，FPR）和F1分数评估模型性能，这些指标的计算公式如下：
+\begin{align*}
+    &\mathrm{Precision}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}} \text{，} \\
+    &\mathrm{Recall}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}} \text{，} \\
+    &\mathrm{FPR}=\frac{\mathrm{FP}}{\mathrm{FP}+\mathrm{TN}} \text{，} \\
+    &\mathrm{F1}=\frac{2\times\mathrm{Precision}\times\mathrm{Recall}}{\mathrm{Precision}+\mathrm{Recall}} \text{。}
+\end{align*}
+实验结果如\cref{table:matrics of mgdn and the baseline methods}所示。
+
+\begin{table}[ht]
+    \centering
+    \caption{SWaT数据集在不同域中的统计数据}
+    \label{table:swat static info}
+    \begin{tabular}{ccccc}
+        \toprule
+        \textbf{域} & \textbf{训练数据} & \textbf{训练数据条目} & \textbf{特征数} & \textbf{异常率} \\
+        \midrule
+        物理域 & 21,830 & 34,201 & 51 & 16.61\% \\
+        网络域 & 21,830 & 34,201 & 3  & 16.61\% \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{MGDN与基线方法的评价指标}
+    \label{table:matrics of mgdn and the baseline methods}
+    \begin{tabular}{ccccc}
+        \toprule
+        \textbf{Method} & \textbf{FPR (\%)} & \textbf{Precision (\%)} & \textbf{Recall (\%)} & \textbf{F1 (\%)} \\
+        \midrule
+        DTAAD       & 13.33 & 59.88 & 99.99 & 74.90 \\
+        GDN         & 10.70 & 64.91 & 99.45 & 78.55 \\
+        LSTM-AD     & 13.33 & 59.88 & 99.99 & 74.90 \\
+        MAD-GAN     & 13.57 & 59.45 & 99.99 & 74.57 \\
+        MSCRED      & 13.33 & 59.89 & 99.99 & 74.91 \\
+        MTAD-GAT    & 13.39 & 59.78 & 99.99 & 74.83 \\
+        OmniAnomaly & 13.36 & 59.83 & 99.99 & 74.87 \\
+        TranAD      & 13.35 & 59.85 & 99.99 & 74.88 \\
+        USAD        & 13.26 & 60.02 & 99.99 & 75.01 \\
+        \textbf{MGDN}   & \textbf{3.07} & \textbf{84.65} & \textbf{85.12} & \textbf{84.88} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+    \centering
+    \caption{不同多目标优化器下的评价指标}
+    \label{table:matrics of opt}
+    \begin{tabular}{cccc}
+        \toprule
+        \textbf{Method} & \textbf{Precision (\%)} & \textbf{Recall (\%)} & \textbf{F1 (\%)} \\
+        \midrule
+        0.25, 0.75  & 49.30 & 84.46 & 62.28 \\
+        0.5, 0.5    & 83.15 & 82.34 & 83.87 \\
+        0.75, 0.25  & 80.99 & 83.39 & 82.79 \\
+        \textbf{MGDA}        & \textbf{84.65} & \textbf{85.12} & \textbf{84.88} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+将多梯度优化器更换成基于静态权重的梯度优化器，并分别设置不同的权重。
+从\cref{table:matrics of opt}中可以看出，将物理域和网络域的损失权重分别设定为0.5和0.5能够取得比其他静态权重方法更好的效果，但仍然比使用MGDA的模型的F1低1.01\%。
+因此，引入多梯度下降优化算法有利于模型更好地动态调整。
