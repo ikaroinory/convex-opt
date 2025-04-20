@@ -1,6 +1,5 @@
 \documentclass{reportx}
 
-\newcounter{csubsection}
 \NewDocumentCommand\optmodule{sO{}mmm}{%
     \IfBooleanTF{#1}{%
         \begin{equation*}
@@ -26,8 +25,6 @@
 }
 
 \begin{document}
-    % \nocite{*}
-
     \input{tex/1 文献情况介绍及实验内容.tex}
     \input{tex/2 算法实现及改进.tex}
     \input{tex/3 核心优化思想及其发展历程.tex}
