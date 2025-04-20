@@ -4,5 +4,6 @@ from .ConjugateGradient import ConjugateGradient
 from .DampedNewton import DampedNewton
 from .GradientDescent import GradientDescent
 from .Newton import Newton
+from .RandomSearch import RandomSearch
 from .StochasticGradientDescent import StochasticGradientDescent
 from .SubgradientDescent import SubgradientDescent

@@ -9,6 +9,17 @@ f = lambda x: rosenbrock_banana(x, a=1, b=-100)
 
 task_list = [
     {
+        'task_name': 'Random Search',
+        'x': nn.Parameter(torch.tensor([-1.5, 2.])),
+        'optimizer': RandomSearch,
+        'args': {
+            'lr': 0.1,
+            'sigma': 0.1,
+            'perturbation_scale': 1
+        },
+        'epochs': 5000
+    },
+    {
         'task_name': 'Gradient Descent',
         'x': nn.Parameter(torch.tensor([-1.5, 2.])),
         'optimizer': GradientDescent,
