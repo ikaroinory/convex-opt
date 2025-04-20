@@ -2,15 +2,38 @@
 
 \subsection{MGDN}
 
-近年来，工业控制系统的异常检测研究逐渐从单领域分析转向多模态数据融合。传统方法如基于统计过程控制（SPC）和自回归模型（ARIMA）虽能捕捉单维度异常，但难以应对跨领域攻击（如同时篡改传感器数据与网络流量的协同攻击）。最新进展集中在图神经网络（GNN）与多任务学习的结合上，通过建模设备间的物理拓扑与网络交互关系提升检测能力。
+文章使用SWaT（Secure Water Treatment）\cite{mathur2016swat}数据集进行实验。
+该数据集由新加坡科技设计大学（Singapore University of Technology and Design，SUTD）网络安全研究中心的iTrust实验室发布，模拟了真实水处理系统的运行场景。
+数据集包含51个物理传感器（如流量计、阀门状态）和16个网络特征（如数据包数量、协议类型），时间跨度为11天，前7天为正常操作，后4天注入41种攻击。
+\cref{table:swat static info}总结了SWaT数据集在物理和网络领域的统计数据。
 
-论文采用SWaT（Secure Water Treatment）数据集，该数据集由新加坡理工大学发布，模拟真实水处理系统的运行场景。数据集包含51个物理传感器（如流量计、阀门状态）和16个网络特征（如数据包数量、协议类型），时间跨度为11天，前7天为正常操作，后4天注入36种攻击（包括传感器欺骗、命令注入、网络泛洪等）。例如，攻击A21通过修改化学药剂投加量触发水质异常，而攻击A35则通过高频Modbus请求干扰控制指令。
-实验结果如\cref{table:the accuracy of mgdn and the baseline methods using swat}所示。
+\begin{table}[ht]
+    \centering
+    \caption{SWaT数据集在不同域中的统计数据}
+    \label{table:swat static info}
+    \begin{tabular}{ccccc}
+        \toprule
+        \textbf{域} & \textbf{训练数据} & \textbf{训练数据条目} & \textbf{特征数} & \textbf{异常率} \\
+        \midrule
+        物理域 & 21,830 & 34,201 & 51 & 16.61\% \\
+        网络域 & 21,830 & 34,201 & 3  & 16.61\% \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+文章使用准确率（Precision）、召回率（Recall）、假阳性率（False Positive Rate，FPR）和F1分数评估模型性能，这些指标的计算公式如下：
+\begin{align*}
+    &\mathrm{Precision}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}} \text{，} \\
+    &\mathrm{Recall}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}} \text{，} \\
+    &\mathrm{FPR}=\frac{\mathrm{FP}}{\mathrm{FP}+\mathrm{TN}} \text{，} \\
+    &\mathrm{F1}=\frac{2\times\mathrm{Precision}\times\mathrm{Recall}}{\mathrm{Precision}+\mathrm{Recall}} \text{。}
+\end{align*}
+实验结果如\cref{table:matrics of mgdn and the baseline methods}所示。
 
 \begin{table}[ht]
     \centering
     \caption{MGDN与基线方法的准确性（在数据集SWaT下）}
-    \label{table:the accuracy of mgdn and the baseline methods using swat}
+    \label{table:matrics of mgdn and the baseline methods}
     \begin{tabular}{ccccc}
         \toprule
         \textbf{Method} & \textbf{FPR (\%)} & \textbf{Precision (\%)} & \textbf{Recall (\%)} & \textbf{F1 (\%)} \\
@@ -31,7 +54,7 @@
 
 \subsection{MicroDig}
 
-在评估MicroDig的性能时，文章构建了三个数据集，分别是来自腾讯的真实世界性能问题案例（数据集$\mathcal{A}$）、开源微服务系统Train-Ticket中的注入问题（数据集$\mathcal{B}$），以及中国建设银行电子商务系统的模拟问题（数据集$\mathcal{C}$）。这些数据集涵盖了不同规模和类型的微服务系统，为全面评估MicroDig提供了丰富的场景。实验旨在回答三个研究问题：MicroDig的诊断准确性（RQ1）、诊断效率（RQ2）以及核心组件对性能的贡献（RQ3）。
+在评估MicroDig的性能时，文章构建了三个数据集，分别是来自腾讯的真实世界性能问题案例（数据集$\mathcal{A}$）、开源微服务系统Train-Ticket中的注入问题（数据集$\mathcal{B}$）\cite{zhou2018fault}，以及中国建设银行电子商务系统的模拟问题（数据集$\mathcal{C}$）。这些数据集涵盖了不同规模和类型的微服务系统，为全面评估MicroDig提供了丰富的场景。实验旨在回答三个研究问题：MicroDig的诊断准确性（RQ1）、诊断效率（RQ2）以及核心组件对性能的贡献（RQ3）。
 
 \begin{table}[ht]
     \centering
