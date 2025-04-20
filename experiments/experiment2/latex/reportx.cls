@@ -16,6 +16,8 @@
 %----------------------------------------------------------------------------------------------------%
 % ----- Control -----
 \RequirePackage{ifthen}
+\RequirePackage{ifplatform}
+\RequirePackage{xpatch}
 
 % ----- Layout -----
 \RequirePackage[a4paper,hmargin=3.17cm,vmargin=2.54cm]{geometry}
@@ -50,6 +52,22 @@
 
 % ----- Footer -----
 \RequirePackage{fancyhdr}
+
+%----------------------------------------------------------------------------------------------------%
+%
+% -> Font
+%
+%----------------------------------------------------------------------------------------------------%
+\ExplSyntaxOn
+    \xpatchcmd\__xeCJK_check_family:n{\__xeCJK_warning:nxx}{\__xeCJK_info:nxx}{}{}
+\ExplSyntaxOff
+
+\ifwindows
+    \setCJKmainfont[AutoFakeBold, AutoFakeSlant]{SimSun}
+\fi
+\ifmacosx
+    \setCJKmainfont[AutoFakeBold, AutoFakeSlant]{Songti SC}
+\fi
 
 %----------------------------------------------------------------------------------------------------%
 %
