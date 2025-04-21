@@ -1,0 +1,25 @@
+\section{实验设置及结果}
+
+为了使优化器的通用性和可扩展性, 实验基于PyTorch的Optimizer类进行优化器实现, 并分别实现了随机搜索优化器, 梯度下降优化器, 次梯度下降优化器, 共轭方向优化器, 共轭梯度优化器, 变尺度法优化器（BFGS）, 随机梯度下降优化器, Newton优化器, 阻尼Newton优化器, ADMM优化器和Krylov子空间优化器, 并使用Rosenbrock Banana函数作为优化器测试函数, 即
+\begin{equation*}
+    f(x_1, x_2)=(a-x_1)^2-b(x_2-x_1^2)^2,
+\end{equation*}
+其中$a=1$, $b=-100$.
+
+实验在如\cref{table:exp env}所示的环境下进行。
+\begin{table}[ht]
+    \centering
+    \caption{实验环境}
+    \label{table:exp env}
+    \begin{tabular}{cc}
+        \toprule
+        配置项 & 规格 \\
+        \midrule
+        操作系统 & macOS Ventura 13.3 \\
+        内存 & 16 GB \\
+        处理器 & Apple M1 Pro \\
+        Python版本 & 3.11.11 \\
+        PyTorch版本 & 2.5.1 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

@@ -1,66 +1,171 @@
 \section{优化方法介绍}
 
+设优化问题为
+\begin{equation}
+    \min_{\bm{x}} ~ f(\bm{x}),
+    \label{equation:opt}
+\end{equation}
+其中$f:\mathbb{R}^n\to\mathbb{R}$.
+下面将对\cref{equation:opt}讨论各种典型的优化方法.
+
 \subsection{随机搜索法}
 
-随机搜索法（Random Search Method）是一种无导数优化方法，其基本思想是在定义域内随机生成若干点，并选择函数值最小的作为当前最优解。
-设优化问题为
-\begin{equation*}
-    \min_{\bm{x}\in\mathbb{R}^n} ~ f(\bm{x}) \text{。}
-\end{equation*}
-在第$k$次迭代中，随机生成点$\bm{x}_k'\in U(\bm{x}_k)$，其中$U(\bm{x}_k)$为$\bm{x}_k$的某一邻域。
+随机搜索法(Random Search Method)是一种无导数优化方法, 其基本思想是在定义域内随机生成若干点, 并选择函数值最小的作为当前最优解.
+在第$k$次迭代中, 随机生成点$\bm{x}_k'\in U(\bm{x}_k)$, 其中$U(\bm{x}_k)$为$\bm{x}_k$的某一邻域.
 
 则有迭代公式
 \begin{equation*}
-    \bm{x}_{k+1}=\bm{x}_k'
+    \bm{x}_{k+1}=
     \begin{cases}
-        \bm{x}_k'\text{，} &f(\bm{x}_k')<f(\bm{x}_k) \text{，} \\
-        \bm{x}_k\text{，} &f(\bm{x}_k')\geq f(\bm{x}_k) \text{。}
+        \bm{x}_k'\text{, } &f(\bm{x}_k')<f(\bm{x}_k), \\
+        \bm{x}_k\text{, } &f(\bm{x}_k')\geq f(\bm{x}_k).
     \end{cases}
 \end{equation*}
-该方法通过不断试探更新寻找函数值更小的位置，而无需任何梯度信息。
+该方法通过不断试探更新寻找函数值更小的位置, 而无需任何梯度信息.
 
 \subsection{梯度下降法}
 
-梯度下降法（Gradient Descent Method）利用目标函数的梯度信息，以梯度的负方向作为下降方向，即
+梯度下降法(Gradient Descent Method)利用目标函数的梯度信息, 以梯度的负方向作为下降方向, 即
 \begin{equation*}
-    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\nabla f(\bm{x}_k) \text{，}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\nabla f(\bm{x}_k),
 \end{equation*}
-其中$\alpha_k>0$为学习率，$\nabla f(\bm{x}_k)$为目标函数在点$\bm{x}_k$处的梯度。
+其中$\alpha_k>0$为学习率, $\nabla f(\bm{x}_k)$为函数$f$在点$\bm{x}_k$处的梯度.
 
 \subsection{次梯度下降法}
 
-次梯度下降法（Subgradient Descent Method）用于优化非光滑凸函数。
-若$f$在点$\bm{x}_k$处不可导，但存在次梯度$\bm{g}_k\in\partial f(\bm{x}_k)$, 则有
+次梯度下降法(Subgradient Descent Method)用于优化非光滑凸函数.
+若$f$在点$\bm{x}_k$处不可导, 但存在次梯度$\bm{g}_k\in\partial f(\bm{x}_k)$, 则有
 \begin{equation*}
-    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{g}_k \text{，}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{g}_k,
 \end{equation*}
-其中$\alpha_k>0$为学习率，$\partial f(\bm{x}_k)$为目标函数在点$\bm{x}_k$处的次梯度集合。
+其中$\alpha_k>0$为学习率, $\partial f(\bm{x}_k)$为函数$f$在点$\bm{x}_k$处的次梯度集合, 即
+\begin{equation*}
+    \partial f(\bm{x}_k)=\left\{\bm{g}_k \left| ~ f(\bm{x}_k+\bm{\epsilon}_k)-f(\bm{x}_k)\geq\bm{g}_k^\mathrm{T}\bm{\epsilon}_k, \forall\bm{\epsilon}_k\in\mathbb{R}^n\right.\right\}.
+\end{equation*}
 
 \subsection{共轭方向法}
 
-共轭方向法（Conjugate Direction Method）用于二次函数
+共轭方向法(Conjugate Direction Method)用于二次函数
 \begin{equation*}
-    f(\bm{x})=\frac{1}{2}\bm{x}^\mathrm{T}\bm{Ax}-\bm{b}^\mathrm{T}\bm{x} \text{，}
+    f(\bm{x})=\frac{1}{2}\bm{x}^\mathrm{T}\bm{Ax}-\bm{b}^\mathrm{T}\bm{x},
 \end{equation*}
-其中矩阵$\bm{A}$对称正定。
+其中矩阵$\bm{A}$对称正定.
 
-共轭方向法需要构造一组关于矩阵$\bm{A}$的共轭方向$\{\bm{d}_i\}_{i=1}^n$，使得
+共轭方向法需要构造一组关于矩阵$\bm{A}$的共轭方向$\{\bm{d}_i\}_{i=1}^n$, 使得
 \begin{equation*}
-    \bm{d}_i\bm{A}\bm{d}_j=0 \text{，} i\ne j \text{，}
+    \bm{d}_i\bm{A}\bm{d}_j=0, i\ne j,
 \end{equation*}
-沿着这些方向进行线性搜索，即
+沿着这些方向进行线性搜索, 即
 \begin{equation*}
-    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{d}_k \text{，}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{d}_k,
 \end{equation*}
-其中$\alpha_k>0$为学习率，可通过一维搜索得到。
+其中$\alpha_k>0$为学习率, 可通过一维搜索得到.
+
+对于一般优化问题(如\cref{equation:opt}), 使用如下公式迭代共轭方向：
+\begin{equation*}
+    \bm{d}_{k+1}=-\nabla f(\bm{x}_{k+1})+\beta_k\bm{d}_k, \bm{d}_0=-\nabla f(\bm{x}_0).
+\end{equation*}
+$\beta_k$的迭代有FR法、PR法等, 其中PR法较为常用.
+对于FR法, 有
+\begin{equation*}
+    \beta_k=\frac{\|\nabla f(\bm{x}_{k+1})\|^2}{\|\nabla f(\bm{x}_{k})\|^2}.
+\end{equation*}
+对于PR法, 有
+\begin{equation*}
+    \beta_k=\frac{\left[\nabla f(\bm{x}_{k+1})\right]^\mathrm{T}[\nabla f(\bm{x}_{k+1})-\nabla f(\bm{x}_{k})]}{\|\nabla f(\bm{x}_{k})\|^2}.
+\end{equation*}
 
 \subsection{共轭梯度法}
 
-共轭梯度法（Conjugate Gradient Method）是一种特殊的共轭方向法，使用当前梯度和上一次方向构造共轭方向，避免计算$\bm{A}$。
-对于二次函数，其迭代格式为：
+共轭梯度法(Conjugate Gradient Method)是一种特殊的共轭方向法, 使用当前梯度和上一次方向构造共轭方向, 避免计算$\bm{A}$.
+对于二次函数, 其迭代格式为：
 \begin{align*}
-    &\bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{d}_k \text{，} \\
-    &\alpha_k=\frac{\bm{r}_k^\mathrm{T}\bm{r}_k}{\bm{d}_k^\mathrm{T}\bm{Ad}_k} \text{，} \\
-    &\bm{d}_k=\bm{r}_k+\beta_{k-1}\bm{d}_{k-1} \text{，} \beta_{k-1}=\frac{\bm{r}_k^\mathrm{T}\bm{r}_k}{\bm{r}_{k-1}^\mathrm{T}\bm{r}_{k-1}} \text{，} \\
-    &\bm{r}_k=\bm{b}-\bm{Ax}_k \text{，} \bm{r}_0=-\nabla f(\bm{x}_0) \text{。}
+    &\bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{d}_k, \\
+    &\alpha_k=\frac{\bm{r}_k^\mathrm{T}\bm{r}_k}{\bm{d}_k^\mathrm{T}\bm{Ad}_k}, \\
+    &\bm{d}_k=\bm{r}_k+\beta_{k-1}\bm{d}_{k-1}, \beta_{k-1}=\frac{\bm{r}_k^\mathrm{T}\bm{r}_k}{\bm{r}_{k-1}^\mathrm{T}\bm{r}_{k-1}}, \\
+    &\bm{r}_k=\bm{b}-\bm{Ax}_k, \bm{r}_0=-\nabla f(\bm{x}_0).
 \end{align*}
+
+\subsection{变尺度法}
+
+变尺度法(Quasi-Newton Method)利用对称正定矩阵$\bm{B}_k$近似Hessian矩阵, 从而加速收敛.
+
+变尺度法的迭代公式为
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{H}_k\nabla f(\bm{x}_k), \bm{H}_k=\bm{B}_k^{-1}.
+\end{equation*}
+
+为了构造拟Newton条件, 
+\begin{equation*}
+    \bm{B}_{k+1}\bm{s}_{k}=\bm{y}_k,
+\end{equation*}
+还需要两个迭代公式, 即
+\begin{align*}
+    &\bm{s}_k=\bm{x}_{k+1}-\bm{x}_k \\
+    &\bm{y}_k=\nabla f(\bm{x}_{k+1})-f(\bm{x}_k).
+\end{align*}
+
+在变尺度法中, 对$\bm{H}_k$的迭代有多种方法, 例如DFP法和BFGS法.
+DFP法的迭代公式为
+\begin{equation*}
+    \bm{H}_{k+1}=\bm{H}_k+\frac{\bm{s}_k\bm{s}_k^\mathrm{T}}{\bm{s}_k^\mathrm{T}\bm{y}_k}-\frac{\bm{H}_k\bm{y}_k\bm{y}_k^\mathrm{T}\bm{H}_k}{\bm{y}_k^\mathrm{T}\bm{H}_k\bm{y}_k}.
+\end{equation*}
+BFGS法的迭代公式为
+\begin{equation*}
+    \bm{H}_{k+1}=(\bm{I}-\rho_k\bm{s}_k\bm{y}_k^\mathrm{T})\bm{H}_k(\bm{I}-\rho\bm{y}_k\bm{s}_k^\mathrm{T})+\rho_k\bm{s}_k\bm{s}_k^\mathrm{T},
+\end{equation*}
+其中$\bm{I}$为单位矩阵.
+BFGS法相比DFP法更加稳定, 实用性更强, 是最常用的变尺度方法之一.
+
+\subsection{随机梯度下降法}
+
+随机梯度下降法(Stochastic Gradient Descent Method, SGD)在机器学习中常用于大规模样本问题.
+设
+\begin{equation*}
+    f(\bm{x})=\frac{1}{N}\sum_{i=1}^Nf_i(\bm{x}),
+\end{equation*}
+SGD随机选取一个样本或小批次更新, 即
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\nabla f_{i_k}(\bm{x}_k),
+\end{equation*}
+其中$\alpha_k>0$为学习率, $i_k$为当前随机选取的样本索引.
+
+\subsection{Newton法}
+
+Newton法使用函数的二阶导数信息, 迭代公式为
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\left[\nabla^2f(\bm{x}_k)\right]^\mathrm{T}\nabla f(\bm{x}_k),
+\end{equation*}
+其中$\nabla^2f(\bm{x}_k)$为函数$f$在点$\bm{x}_k$的Hessian矩阵.
+
+\subsection{阻尼Newton法}
+
+为了提升稳定性, 阻尼Newton法在Newton的基础上引入阻尼因子, 迭代公式为
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\left[\nabla^2f(\bm{x}_k)\right]^\mathrm{T}\nabla f(\bm{x}_k),
+\end{equation*}
+其中$\alpha_k$为阻尼因子, 以保证下降并避免震荡.
+
+\subsection{交替方向乘子法}
+
+交替方向乘子法(Alternating Direction Method of Multipliers, ADMM)用于分解优化具有分离结构的约束问题
+\optmodule*{\min_{\bm{x},\bm{y}}}{f(\bm{x})+g(\bm{y})}{
+    &\bm{Ax}+\bm{By}=\bm{c}\text{.}
+}
+
+其Lagrange函数为
+\begin{equation}
+    \mathcal{L}(\bm{x},\bm{y},\bm{z})=f(\bm{x})+g(\bm{y})+\bm{z}\mathrm{T}(\bm{Ax}+\bm{By}-\bm{c})+\frac{\rho}{2}\|\bm{Ax}+\bm{By}-\bm{c}\|^2,
+    \label{equation:lagrange}
+\end{equation}
+因此优化目标转化为\cref{equation:lagrange}.
+
+\subsection{Krylov子空间法}
+
+Krylov子空间法用于大规模线性系统或优化问题的迭代方法，基本思想是利用前几次残差张成的Krylov子空间
+\begin{equation*}
+    \mathcal{K}_k(\bm{A},\bm{r}_0)=\mathrm{span}\{\bm{A}^i\bm{r}_0\}_{i=0}^{k-1},
+\end{equation*}
+
+在子空间中寻找最优解近似, 如共轭梯度法(CG)就是Krylov子空间方法在对称正定情形下的实现.
+非对称情形中可使用GMRES方法.
