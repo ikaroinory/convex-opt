@@ -1,0 +1,40 @@
+\documentclass{reportx}
+
+\NewDocumentCommand\optmodule{sO{}mmm}{%
+    \IfBooleanTF{#1}{%
+        \begin{equation*}
+            \ifthenelse{\equal{#2}{}}{}{(#2)\quad}
+            \begin{aligned}
+                \begin{cases}
+                    #3 \quad & #4 \\
+                    \mathrm{s.t.} \quad #5
+                \end{cases}
+            \end{aligned}
+        \end{equation*}
+    }{%
+        \begin{equation}
+            \ifthenelse{\equal{#2}{}}{}{(#2)\quad}
+            \begin{aligned}
+                \begin{cases}
+                    #3 \quad & #4 \\
+                    \mathrm{s.t.} \quad #5
+                \end{cases}
+            \end{aligned}
+        \end{equation}
+    }%
+}
+
+\begin{document}
+    \input{tex/1 实验内容.tex}
+    \input{tex/2 优化方法介绍.tex}
+    % \input{tex/3 核心优化思想及其发展历程.tex}
+    % \input{tex/4 实验设置、数据集及结果分析.tex}
+    % \input{tex/5 结论.tex}
+
+    % \stepcounter{section}
+    % \renewcommand{\refname}{\chinese{section}、参考文献}
+
+    % \phantomsection
+    % \addcontentsline{toc}{section}{参考文献}
+    % \bibliography{references}
+\end{document}

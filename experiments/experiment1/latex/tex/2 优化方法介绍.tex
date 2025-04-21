@@ -1,0 +1,66 @@
+\section{优化方法介绍}
+
+\subsection{随机搜索法}
+
+随机搜索法（Random Search Method）是一种无导数优化方法，其基本思想是在定义域内随机生成若干点，并选择函数值最小的作为当前最优解。
+设优化问题为
+\begin{equation*}
+    \min_{\bm{x}\in\mathbb{R}^n} ~ f(\bm{x}) \text{。}
+\end{equation*}
+在第$k$次迭代中，随机生成点$\bm{x}_k'\in U(\bm{x}_k)$，其中$U(\bm{x}_k)$为$\bm{x}_k$的某一邻域。
+
+则有迭代公式
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k'
+    \begin{cases}
+        \bm{x}_k'\text{，} &f(\bm{x}_k')<f(\bm{x}_k) \text{，} \\
+        \bm{x}_k\text{，} &f(\bm{x}_k')\geq f(\bm{x}_k) \text{。}
+    \end{cases}
+\end{equation*}
+该方法通过不断试探更新寻找函数值更小的位置，而无需任何梯度信息。
+
+\subsection{梯度下降法}
+
+梯度下降法（Gradient Descent Method）利用目标函数的梯度信息，以梯度的负方向作为下降方向，即
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\nabla f(\bm{x}_k) \text{，}
+\end{equation*}
+其中$\alpha_k>0$为学习率，$\nabla f(\bm{x}_k)$为目标函数在点$\bm{x}_k$处的梯度。
+
+\subsection{次梯度下降法}
+
+次梯度下降法（Subgradient Descent Method）用于优化非光滑凸函数。
+若$f$在点$\bm{x}_k$处不可导，但存在次梯度$\bm{g}_k\in\partial f(\bm{x}_k)$, 则有
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{g}_k \text{，}
+\end{equation*}
+其中$\alpha_k>0$为学习率，$\partial f(\bm{x}_k)$为目标函数在点$\bm{x}_k$处的次梯度集合。
+
+\subsection{共轭方向法}
+
+共轭方向法（Conjugate Direction Method）用于二次函数
+\begin{equation*}
+    f(\bm{x})=\frac{1}{2}\bm{x}^\mathrm{T}\bm{Ax}-\bm{b}^\mathrm{T}\bm{x} \text{，}
+\end{equation*}
+其中矩阵$\bm{A}$对称正定。
+
+共轭方向法需要构造一组关于矩阵$\bm{A}$的共轭方向$\{\bm{d}_i\}_{i=1}^n$，使得
+\begin{equation*}
+    \bm{d}_i\bm{A}\bm{d}_j=0 \text{，} i\ne j \text{，}
+\end{equation*}
+沿着这些方向进行线性搜索，即
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{d}_k \text{，}
+\end{equation*}
+其中$\alpha_k>0$为学习率，可通过一维搜索得到。
+
+\subsection{共轭梯度法}
+
+共轭梯度法（Conjugate Gradient Method）是一种特殊的共轭方向法，使用当前梯度和上一次方向构造共轭方向，避免计算$\bm{A}$。
+对于二次函数，其迭代格式为：
+\begin{align*}
+    &\bm{x}_{k+1}=\bm{x}_k-\alpha_k\bm{d}_k \text{，} \\
+    &\alpha_k=\frac{\bm{r}_k^\mathrm{T}\bm{r}_k}{\bm{d}_k^\mathrm{T}\bm{Ad}_k} \text{，} \\
+    &\bm{d}_k=\bm{r}_k+\beta_{k-1}\bm{d}_{k-1} \text{，} \beta_{k-1}=\frac{\bm{r}_k^\mathrm{T}\bm{r}_k}{\bm{r}_{k-1}^\mathrm{T}\bm{r}_{k-1}} \text{，} \\
+    &\bm{r}_k=\bm{b}-\bm{Ax}_k \text{，} \bm{r}_0=-\nabla f(\bm{x}_0) \text{。}
+\end{align*}
