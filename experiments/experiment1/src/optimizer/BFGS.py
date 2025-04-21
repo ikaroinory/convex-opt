@@ -51,7 +51,7 @@ class BFGS(Optimizer, Visual):
         flat_grads = []
         for group in self.param_groups:
             for p in group['params']:
-                self.point_list.append(p.data)
+                self.point_list.append(p.data.clone())
 
                 flat_params.append(p.data.view(-1))
                 flat_grads.append(p.grad.view(-1))

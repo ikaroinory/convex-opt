@@ -18,7 +18,6 @@ class ConjugateGradient(Optimizer, Visual):
         self.loss_list.append(loss.item())
 
         prev_grads = self.state.get('prev_grads')
-        prev_dirs = self.state.get('prev_dirs')
 
         new_grads = []
         new_dirs = []
@@ -30,7 +29,7 @@ class ConjugateGradient(Optimizer, Visual):
                 if p.grad is None:
                     continue
 
-                self.point_list.append(p.data)
+                self.point_list.append(p.data.clone())
 
                 grad = p.grad.detach()
 

@@ -22,14 +22,13 @@ class ConjugateDirection(Optimizer, Visual):
         grads = []
         params_with_grad = []
         for group in self.param_groups:
-            lr = group['lr']
             beta_type = group['beta_type']
 
             for p in group['params']:
                 if p.grad is None:
                     continue
 
-                self.point_list.append(p.data)
+                self.point_list.append(p.data.clone())
 
                 grad = p.grad.detach().clone()
                 grads.append(grad)

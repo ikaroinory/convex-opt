@@ -5,6 +5,9 @@ from torch import nn
 from functions import rosenbrock_banana
 from optimizer import *
 
+torch.manual_seed(42)
+torch.set_printoptions(precision=2)
+
 f = lambda x: rosenbrock_banana(x, a=1, b=-100)
 
 task_list = [
@@ -13,11 +16,9 @@ task_list = [
         'x': nn.Parameter(torch.tensor([-1.5, 2.])),
         'optimizer': RandomSearch,
         'args': {
-            'lr': 0.1,
-            'sigma': 0.1,
-            'perturbation_scale': 1
+            'lr': 0.1
         },
-        'epochs': 5000
+        'epochs': 2500
     },
     {
         'task_name': 'Gradient Descent',
@@ -26,7 +27,7 @@ task_list = [
         'args': {
             'lr': 1e-3
         },
-        'epochs': 15000
+        'epochs': 11000
     },
     {
         'task_name': 'Subgradient Descent',
@@ -35,7 +36,7 @@ task_list = [
         'args': {
             'lr': 1e-3
         },
-        'epochs': 15000
+        'epochs': 11000
     },
     {
         'task_name': 'Conjugate Direction',
@@ -43,27 +44,27 @@ task_list = [
         'optimizer': ConjugateDirection,
         'args': {
             'lr': 1e-3,
-            'beta_type': 'FR'
+            'beta_type': 'PR'
         },
-        'epochs': 47
+        'epochs': 25000
     },
     {
         'task_name': 'Conjugate Gradient',
-        'x': nn.Parameter(torch.tensor([-1.5, 2.])),
+        'x': nn.Parameter(torch.tensor([1.5, 2.])),
         'optimizer': ConjugateGradient,
         'args': {
             'lr': 1e-3
         },
-        'epochs': 47
+        'epochs': 500
     },
     {
         'task_name': 'BFGS',
         'x': nn.Parameter(torch.tensor([-1.5, 2.])),
         'optimizer': BFGS,
         'args': {
-            'lr': 1
+            'lr': 1e-3
         },
-        'epochs': 100
+        'epochs': 22500
     },
     {
         'task_name': 'SGD',
@@ -73,7 +74,7 @@ task_list = [
             'lr': 1e-3,
             'momentum': 0.8
         },
-        'epochs': 10000
+        'epochs': 7500
     },
     {
         'task_name': 'Newton',
@@ -89,7 +90,28 @@ task_list = [
             'lr': 2,
             'damping': 2
         },
-        'epochs': 2000
+        'epochs': 3000
+    },
+    {
+        'task_name': 'Admm',
+        'x': nn.Parameter(torch.tensor([-1.5, 2.])),
+        'optimizer': Admm,
+        'args': {
+            'lr': 1e-3,
+            'rho': 1000,
+            'l1_weight': 0
+        },
+        'epochs': 23000
+    },
+    {
+        'task_name': 'Krylov',
+        'x': nn.Parameter(torch.tensor([-1.5, 2.])),
+        'optimizer': Krylov,
+        'args': {
+            'lr': 1e-3,
+            'beta': 0.9
+        },
+        'epochs': 7000
     }
 ]
 
@@ -105,14 +127,17 @@ for task in task_list:
         loss = f(x)
         loss.backward()
         optimizer.step(lambda: f(x))
+
     optimizer.point_list.append(x.data)
     optimizer.loss_list.append(f(x).item())
-    optimizer.show(task_name)
+
+    optimizer.show_loss(title=task_name, save=True, padding_to=25000)
+    optimizer.show_points(f, title=task_name, save=True)
 
     best_point = optimizer.point_list[np.argmin(optimizer.loss_list)]
 
     print(f'Optimizer: {task_name}')
-    print(f'Best point: ({best_point[0]:>7.4f}, {best_point[1]:>7.4f})')
-    print(f'Min Value: {np.min(optimizer.loss_list):>6.4f}')
+    print(f'Best point: {best_point}')
+    print(f'Min Value: {f(best_point):.2f}')
     print(f'Iterator count: {np.argmin(optimizer.loss_list)}')
     print()

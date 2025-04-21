@@ -25,11 +25,10 @@ class StochasticGradientDescent(Optimizer, Visual):
                 if p.grad is None:
                     continue
 
-                self.point_list.append(p.data)
+                self.point_list.append(p.data.clone())
 
                 d_p = p.grad
 
-                # 获取或创建动量缓存
                 param_state = self.state[p]
                 if 'momentum_buffer' not in param_state:
                     buf = param_state['momentum_buffer'] = torch.clone(d_p).detach()

@@ -1,3 +1,4 @@
+import torch
 from torch.optim.optimizer import Optimizer
 
 from .Visual import Visual
@@ -12,7 +13,7 @@ class GradientDescent(Optimizer, Visual):
         loss = None
         if closure is not None:
             loss = closure()
-            self.loss_list.append(loss.item())
+            self.loss_list.append(torch.round(loss, decimals=4).item())
 
         for group in self.param_groups:
             lr = group['lr']
@@ -20,7 +21,7 @@ class GradientDescent(Optimizer, Visual):
                 if p.grad is None:
                     continue
 
-                self.point_list.append(p.data)
+                self.point_list.append(p.data.clone())
 
                 p.data -= lr * p.grad
 

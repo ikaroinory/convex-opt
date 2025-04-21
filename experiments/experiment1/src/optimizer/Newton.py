@@ -20,7 +20,7 @@ class Newton(Optimizer, Visual):
                 if p.grad is None:
                     continue
 
-                self.point_list.append(p.data)
+                self.point_list.append(p.data.clone())
 
                 grad = p.grad.data
 
