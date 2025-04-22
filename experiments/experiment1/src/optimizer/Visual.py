@@ -18,6 +18,8 @@ class Visual:
         if padding_to is not None:
             loss_list += [loss_list[-1] for _ in range(padding_to - len(loss_list))]
 
+        plt.figure(figsize=(8, 6))
+
         plt.plot(loss_list)
         loc = np.argmin(loss_list)
         plt.plot(loc, loss_list[loc], marker='^', color='red', markersize=10, label='Marked Point')
@@ -40,7 +42,7 @@ class Visual:
         data = torch.stack([X, Y], dim=-1)
         Z = f(data)
 
-        plt.figure(figsize=(6, 6))
+        plt.figure(figsize=(8, 6))
         plt.contour(X.numpy(), Y.numpy(), Z.numpy(), levels=30, cmap='viridis', linewidths=1.2)
 
         plt.xlabel('$x$')

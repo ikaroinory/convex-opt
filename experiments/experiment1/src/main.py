@@ -50,12 +50,12 @@ task_list = [
     },
     {
         'task_name': 'Conjugate Gradient',
-        'x': nn.Parameter(torch.tensor([1.5, 2.])),
+        'x': nn.Parameter(torch.tensor([-1.5, 2.])),
         'optimizer': ConjugateGradient,
         'args': {
             'lr': 1e-3
         },
-        'epochs': 500
+        'epochs': 25000
     },
     {
         'task_name': 'BFGS',
@@ -93,9 +93,9 @@ task_list = [
         'epochs': 3000
     },
     {
-        'task_name': 'Admm',
+        'task_name': 'ADMM',
         'x': nn.Parameter(torch.tensor([-1.5, 2.])),
-        'optimizer': Admm,
+        'optimizer': ADMM,
         'args': {
             'lr': 1e-3,
             'rho': 1000,

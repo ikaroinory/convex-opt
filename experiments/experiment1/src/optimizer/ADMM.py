@@ -4,7 +4,7 @@ from torch.optim import Optimizer
 from .Visual import Visual
 
 
-class Admm(Optimizer, Visual):
+class ADMM(Optimizer, Visual):
     def __init__(self, params, lr=1e-3, rho=1e-2, l1_weight=1e-4):
         Optimizer.__init__(self, params, {'lr': lr, 'rho': rho, 'l1_weight': l1_weight})
         Visual.__init__(self)

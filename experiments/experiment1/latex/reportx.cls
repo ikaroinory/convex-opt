@@ -43,6 +43,7 @@
 
 % ----- Caption -----
 \RequirePackage{caption}
+\RequirePackage{subcaption}
 
 % ----- Table -----
 \RequirePackage{booktabs}
@@ -109,6 +110,9 @@
     \crefformat{subsection}{ #2#1 小节#3}
 
     \crefrangeformat{equation}{公式(#3#1#4) $\sim$ (#5#2#6)}
+    \crefrangeformat{figure}{#3图 #1#4至#5图 #2#6 }
+
+    \crefmultiformat{figure}{#2图 #1#3}{, #2图 #1#3 }{, #2图 #1#3 }{和#2图 #1#3 }
 }
 
 %----------------------------------------------------------------------------------------------------%

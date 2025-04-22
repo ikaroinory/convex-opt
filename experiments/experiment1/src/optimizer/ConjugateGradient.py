@@ -38,7 +38,7 @@ class ConjugateGradient(Optimizer, Visual):
                 else:
                     prev_grad = self.state['prev_grads'].pop(0)
                     prev_dir = self.state['prev_dirs'].pop(0)
-                    beta = grad.dot(grad) / (prev_grad.dot(prev_grad) + 1e-10)
+                    beta = grad.dot(grad - prev_grad) / (prev_grad.dot(prev_grad) + 1e-10)
                     direction = -grad + beta * prev_dir
 
                 p.add_(lr * direction)

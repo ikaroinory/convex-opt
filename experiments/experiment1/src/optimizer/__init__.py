@@ -1,4 +1,4 @@
-from .Admm import Admm
+from .ADMM import ADMM
 from .BFGS import BFGS
 from .ConjugateDirection import ConjugateDirection
 from .ConjugateGradient import ConjugateGradient
