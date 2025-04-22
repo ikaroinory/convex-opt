@@ -1,11 +1,11 @@
 \section{实验设置及结果}
 
-为了使优化器的通用性和可扩展性, 实验基于PyTorch的Optimizer类进行优化器实现, 并分别实现了随机搜索优化器, 梯度下降优化器, 次梯度下降优化器, 共轭方向优化器, 共轭梯度优化器, 变尺度法优化器（BFGS）, 随机梯度下降优化器, Newton优化器, 阻尼Newton优化器, ADMM优化器和Krylov子空间优化器, 并使用Rosenbrock Banana函数作为优化器测试函数, 即
+为了使优化器的通用性和可扩展性，实验基于PyTorch的Optimizer类进行优化器实现，并分别实现了随机搜索优化器，梯度下降优化器，次梯度下降优化器，共轭方向优化器，共轭梯度优化器，变尺度法优化器（BFGS），随机梯度下降优化器，Newton优化器，阻尼Newton优化器，ADMM优化器和Krylov子空间优化器，并使用Rosenbrock Banana函数作为优化器测试函数，即
 \begin{equation*}
-    f(x_1, x_2)=(a-x_1)^2-b(x_2-x_1^2)^2,
+    f(x_1, x_2)=(a-x_1)^2-b(x_2-x_1^2)^2 \text{，}
 \end{equation*}
-其中$a=1$, $b=-100$.
-实验结果如\cref{table:result}所示, 各优化器的最优值收敛曲线和最优点收敛路径如\cref{figure:random search}至\cref{figure:krylov}所示.
+其中$a=1$，$b=-100$。
+实验结果如\cref{table:result}所示，各优化器的最优值收敛曲线和最优点收敛路径如\cref{figure:random search}至\cref{figure:krylov}所示。
 
 \begin{table}[ht]
     \centering
@@ -187,9 +187,9 @@
     \label{figure:krylov}
 \end{figure}
 
-从各图可看出, 各优化器均在较少的迭代轮次内下降至最优值附近, 但各优化器迭代至最优点需要的迭代轮次总和不同.
-综合\cref{table:result}可知, Newton法所需要的迭代轮次最少.
+从各图可看出，各优化器均在较少的迭代轮次内下降至最优值附近，但各优化器迭代至最优点需要的迭代轮次总和不同。
+综合\cref{table:result}可知，Newton法所需要的迭代轮次最少。
 
-鉴于Random Search优化器对初始随机种子较为敏感, 实验对多个随机种子进行了实验比较, 结果显示使用种子42时所需迭代轮次较少, 因此在实验中固定采用该种子.
+鉴于Random Search优化器对初始随机种子较为敏感，实验对多个随机种子进行了实验比较，结果显示使用种子42时所需迭代轮次较少，因此在实验中固定采用该种子。
 
-从\cref{figure:random search}中可看出, Random Search优化器也在较少的迭代轮次下收敛到最优点.
+从\cref{figure:random search}中可看出，Random Search优化器也在较少的迭代轮次下收敛到最优点。
