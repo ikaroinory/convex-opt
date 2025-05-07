@@ -1,0 +1,44 @@
+\section*{10}
+
+在大规模优化问题中, 单机求解往往因计算和存储资源限制而变得不可行, 因此发展出多种分布式优化算法.
+以下列出几种常见的分布式优化方法及其基本思想:
+
+\begin{itemize}
+    \item
+        \textbf{交替方向乘子法(ADMM, Alternating Direction Method of Multipliers)}
+
+        通过将优化问题分解为多个子问题, 每个子问题只涉及部分变量, 各子问题可并行求解, 并通过引入共识变量和拉格朗日乘子更新进行协调.
+        适用于具有分块结构的问题, 如Lasso等.
+
+    \item
+        \textbf{分布式梯度下降法(DGD, Distributed Gradient Descent)}
+
+        将数据分布在多个计算节点上, 各节点独立计算本地梯度, 再通过通信机制(如平均梯度)更新全局模型.
+        适用于通信成本较低或模型结构较简单的场景.
+
+    \item
+        \textbf{分布式牛顿法(Distributed Newton Method)}
+
+        在每个节点分别计算局部 Hessian 或其近似形式, 从而并行进行牛顿方向的求解.
+        适用于凸优化问题中对收敛速度要求较高的应用.
+
+    \item
+        \textbf{对偶分解(Dual Decomposition)}
+
+        通过拉格朗日对偶化将带有耦合约束的原始问题转化为多个子问题, 在对偶空间中通过乘子协调各子问题, 常结合子梯度法或对偶上升法.
+        适用于线性/凸优化等耦合较弱问题.
+
+    \item
+        \textbf{共识优化(Consensus Optimization)}
+
+        每个节点保留变量副本, 并引入约束或惩罚项使所有副本收敛一致.
+        常与ADMM方法结合用于参数同步.
+
+    \item
+        \textbf{联邦优化(Federated Optimization)}
+
+        适用于数据无法集中存储(如出于隐私考虑)的问题.
+        各终端设备在本地进行训练, 仅上传模型参数或梯度信息, 服务器聚合后再下发新模型(如FedAvg).
+        广泛应用于移动端分布式学习任务.
+
+\end{itemize}

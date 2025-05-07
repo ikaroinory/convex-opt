@@ -1,0 +1,31 @@
+\section*{11}
+
+罚因子法是一类将约束优化问题转化为无约束优化问题的方法.
+其基本思想是将违反约束的程度通过一个惩罚项加入目标函数中, 从而迫使最优解逐渐趋近于可行域.
+以带等式约束的问题为例, 其罚函数形式为
+\begin{equation*}
+    \min_{\bm{x}} ~ f(\bm{x})+\frac{\rho}{2}\|h(\bm{x})\|^2,
+\end{equation*}
+其中$\rho>0$是罚因子, $h(\bm{x}) = 0$为约束函数.
+随着$\rho\to+\infty$, 解趋于可行, 但过大的$\rho$会导致数值不稳定.
+
+增广拉格朗日法(Augmented Lagrangian Method, ALM)在传统拉格朗日乘子法的基础上引入罚项, 兼顾了约束精确性和数值稳定性.
+其基本形式为
+\begin{equation*}
+    \mathcal{L}_\rho(\bm{x}, \lambda)=f(\bm{x})+\lambda^\top h(\bm{x})+\frac{\rho}{2}\|h(\bm{x})\|^2,
+\end{equation*}
+其中$\lambda$是Lagrange乘子, $\rho$是罚因子.
+ALM通过交替优化$\bm{x}$和更新乘子$\lambda$, 在保证可行性的同时改善了数值性能.
+
+ADMM(Alternating Direction Method of Multipliers)可以视为ALM在变量可分结构上的推广.
+考虑优化问题问题
+\optmodule*{\min_{\bm{x},\bm{z}}}{f(\bm{x})+g(\bm{z})}{
+    &\bm{Ax}+\bm{Bz}=\bm{c}.
+}
+ADMM将拉格朗日函数进行增广后, 采用交替优化的策略依次优化$\bm{x}$和$\bm{z}$, 并更新乘子变量$\bm{y}$.
+其迭代过程通常为
+\begin{align*}
+    \bm{x}_{k+1} &= \arg\min_{\bm{x}} ~ f(\bm{x})+\frac{\rho}{2}\|\bm{Ax}+\bm{Bz}_k-\bm{c}+\bm{y}_k\|^2, \\
+    \bm{z}_{k+1} &= \arg\min_{\bm{z}} ~ g(\bm{z})+\frac{\rho}{2}\|\bm{Ax}_{k+1}+\bm{Bz}-\bm{c}+\bm{y}_k\|^2, \\
+    \bm{y}_{k+1} &= \bm{y}_k+\bm{Ax}_{k+1}+\bm{Bz}^{k+1}-\bm{c}.
+\end{align*}

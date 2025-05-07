@@ -1,0 +1,30 @@
+\section*{3}
+
+目标函数的梯度为
+\begin{equation*}
+    \nabla f(\bm{x})=
+    \begin{pmatrix}
+        4 x_{1} + 2 x_{2} + 1 \\
+        2 x_{1} + 2 x_{2} - 1
+    \end{pmatrix}.
+\end{equation*}
+
+\begin{enumerate}
+    \item
+        $\bm{x}_0=(0,0)^\mathrm{T}$, $\nabla f(\bm{x}_0)=(1,-1)^\mathrm{T}$.
+        使用一维搜索求
+        \begin{equation*}
+            \min_{\lambda_0} ~ f\left(\bm{x}_0-\lambda_0\nabla f(\bm{x}_0)\right)=2\lambda-2,
+        \end{equation*}
+        解得$\lambda_0=1$.
+
+    \item
+        $\bm{x}_1=\bm{x}_0-\lambda_0\nabla f(\bm{x}_0)=(-1,1)^\mathrm{T}$, $\nabla f(\bm{x}_1)=(-1,-1)^\mathrm{T}$.
+        使用一维搜索求
+        \begin{equation*}
+            \min_{\lambda_1} ~ f\left(\bm{x}_1-\lambda_1\nabla f(\bm{x}_1)\right)=10\lambda_1-2,
+        \end{equation*}
+        解得$\lambda_1=\frac{1}{5}$.
+\end{enumerate}
+
+要求迭代两次, 因此最小值点为$\bm{x}^\star=\bm{x}_1-\lambda_1\nabla f(\bm{x}_1)=\left(-\frac{4}{5},\frac{6}{5}\right)^\mathrm{T}$, 最小值为$f(\bm{x}^\star)=-\frac{6}{5}$.

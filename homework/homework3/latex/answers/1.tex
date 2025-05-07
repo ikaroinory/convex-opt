@@ -1,0 +1,30 @@
+\section*{1}
+
+在优化问题中, 迭代和逼近是两个核心思想.
+
+迭代是指从一个初始解出发, 通过不断地更新变量, 逐步逼近最优解的过程, 每一次更新称为一次迭代.
+以Gradient Descent法为例, 优化目标为
+\begin{equation*}
+    \min_{\bm{x}} f(\bm{x}),
+\end{equation*}
+迭代公式为
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\eta\nabla f(\bm{x}_k),
+\end{equation*}
+其中$\eta$为学习率.
+在Gradient Descent法中, 每次迭代根据函数的当前梯度, 向下降最快的方向前进, 这体现了逐步改进解的迭代思想.
+
+逼近是指最优化过程中解不一定能一次到达最优值, 而是通过一系列近似的解逐步接近最优解.
+目标是找到足够好的解, 而不是一开始就准确知道最优点.
+以Newton法为例, 优化目标为
+\begin{equation*}
+    \min_{\bm{x}} f(\bm{x}),
+\end{equation*}
+迭代公式为
+\begin{equation*}
+    \bm{x}_{k+1}=\bm{x}_k-\left[\nabla^2f(\bm{x}_k)\right]^{-1}\nabla f(\bm{x}_k).
+\end{equation*}
+Newton法使用了二阶导数信息来构造一个局部的二次近似模型, 即
+\begin{equation*}
+    f(\bm{x})\approx f(\bm{x}_k)+[\nabla f(\bm{x}_k)]^\mathrm{T}(\bm{x}-\bm{x}_k)+\frac{1}{2}(\bm{x}-\bm{x}_k)^\mathrm{T}\nabla^2 f(\bm{x}_k)(\bm{x}-\bm{x}_k).
+\end{equation*}

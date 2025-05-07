@@ -1,0 +1,49 @@
+\documentclass{note}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usetikzlibrary{external}
+% \tikzexternalize
+
+\usepgfplotslibrary{fillbetween}
+
+\newtheorem{theorem}{定理}
+\theoremstyle{definition}
+\newtheorem{definition}{定义}
+
+\NewDocumentCommand\optmodule{sO{}mmm}{%
+    \IfBooleanTF{#1}{%
+        \begin{equation*}
+            \ifthenelse{\equal{#2}{}}{}{(#2)\quad}
+            \begin{aligned}
+                \begin{cases}
+                    #3 \quad & #4 \\
+                    \mathrm{s.t.} \quad #5
+                \end{cases}
+            \end{aligned}
+        \end{equation*}
+    }{%
+        \begin{equation}
+            \ifthenelse{\equal{#2}{}}{}{(#2)\quad}
+            \begin{aligned}
+                \begin{cases}
+                    #3 \quad & #4 \\
+                    \mathrm{s.t.} \quad #5
+                \end{cases}
+            \end{aligned}
+        \end{equation}
+    }%
+}
+\begin{document}
+    \begin{center}
+        {\Large\bfseries 组合优化与凸优化作业3}
+        \vspace{1cm}
+
+        胡冠宇
+    \end{center}
+
+    \foreach \i in {1,...,12} {
+        \input{answers/\i.tex}
+    }
+\end{document}

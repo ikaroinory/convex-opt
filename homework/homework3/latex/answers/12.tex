@@ -1,0 +1,47 @@
+\section*{12}
+
+\begin{itemize}
+    \item
+        \textbf{凸松弛(Convex Relaxation)}
+        
+        将非凸问题中的约束或目标函数放松为凸形式.
+        典型例子如将整数变量放松为连续变量, 或将rank约束替换为核范数.
+        例如, 最大割问题可放松为半正定规划(SDP)问题.
+    
+    \item
+        \textbf{变换变量(Change of Variables)}
+        
+        通过适当的变量替换将非凸形式转化为凸形式, 如在几何规划中采用对数变换后转化为凸优化问题.
+    
+    \item
+        \textbf{上界近似(Upper-bound Approximation)}
+        
+        用一个凸函数上界近似非凸函数, 从而构造一个可解的凸问题.
+        该策略常用于MM(Majorization-Minimization)类算法.
+    
+    \item
+        \textbf{线性矩阵不等式(LMI)方法}
+        
+        在控制理论中, 许多非凸约束可通过引入松弛变量和Schur补方法转化为线性矩阵不等式, 从而构造凸优化问题.
+    
+    \item
+        \textbf{稀疏优化的凸替代(如$\ell_0$到$\ell_1$)}
+        
+        在稀疏学习中, 非凸的$\ell_0$范数难以优化, 通常替换为其凸包——$\ell_1$范数, 使问题可解.
+    
+    \item
+        \textbf{凸-凹程序(DC Programming)}
+        
+        将目标函数表示为凸函数与凸函数之差(Difference of Convex functions), 再使用CCCP(Convex-Concave Procedure)等方法进行迭代优化.
+    
+    \item
+        \textbf{半正定松弛(Semidefinite Relaxation, SDR)}
+        
+        适用于非凸二次优化问题, 通过引入矩阵变量并放松秩约束, 使问题转化为半正定规划.
+    
+    \item
+        \textbf{组合优化中的凸包方法}
+        
+        对离散可行域构造其凸包, 将原问题的最优解作为凸包上某个极点近似, 从而得到近似凸解.
+
+\end{itemize}

@@ -1,0 +1,43 @@
+\section*{6}
+
+\begin{enumerate}[label=\alph*)]
+    \item
+        记
+        \begin{equation*}
+            \mathcal{L}(\bm{x},\bm{u},\bm{v})=f(\bm{x})+\sum_{i=1}^mu_ig_i(\bm{x})+\sum_{j=1}^lv_jh_j(\bm{x}),
+        \end{equation*}
+        则
+        \begin{equation*}
+            \theta(\bm{u},\bm{v})=\inf_{\bm{x}}\mathcal{L}(\bm{x},\bm{u},\bm{v}).
+        \end{equation*}
+        易知$\mathcal{L}(\bm{x},\bm{u},\bm{v})$为关于$(\bm{u},\bm{v})$的仿射函数.
+        又因为下确界保持凹性, 而仿射函数为凹函数, 因此函数$\theta(\bm{u},\bm{v})$为凹函数.
+
+    \item
+    在最优化理论中, 对偶问题是通过原始问题构造出的辅助优化问题.
+    它具有以下几个重要作用:
+    \begin{itemize}
+        \item 对偶问题的最优值提供了原始问题最优值的下界.
+        \item 在强对偶成立的情况下, 可以通过KKT条件判断原始问题的最优解.
+        \item 在某些情况下, 对偶问题比原始问题更容易求解.
+        \item 许多优化方法依赖对偶问题.
+        \item 引入对偶变量能将约束整合进目标函数, 从而简化建模.
+    \end{itemize}
+
+    弱对偶定理指出, 对于任意可行的对偶变量$\bm{u}\geq\bm{0}$, 对偶函数值都不会超过原始问题的最优值, 即
+    \begin{equation*}
+        \theta(\bm{u})\leq p^\star,
+    \end{equation*}
+    因此对偶问题的最优值$\theta(\bm{u}^\star)$满足
+    \begin{equation*}
+        \theta(\bm{u}^\star)\leq p^\star.
+    \end{equation*}
+    这表明对偶解为原始问题目标函数提供了一个下界.
+    
+    强对偶定理则说明, 在原始问题是凸优化问题, 且满足 Slater 条件的情况下, 有
+    \begin{equation*}
+        \theta(\bm{u}^\star)=p^\star.
+    \end{equation*}
+    Slater条件要求存在严格可行点$\bm{x}_0$, 使得不等式约束严格满足, 即$g(\bm{x}_0)<\bm{0}$, 等式约束满足$h(\bm{x}_0)=\bm{0}$.
+    在这种情形下, 原始问题和对偶问题具有相同的最优值, 并且如果对偶最优解存在, 原始问题的最优解满足 KKT 条件.    
+\end{enumerate}

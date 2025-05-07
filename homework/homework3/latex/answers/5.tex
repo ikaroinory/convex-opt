@@ -1,0 +1,18 @@
+\section*{5}
+
+内点法:
+\optmodule*{\min_{\bm{x}}}{f(\bm{x})+\mu\sum_{i=1}^4\max\left\{0,(g_i(\bm{x}))^2\right\}}{
+    &g_1(\bm{x})=x_1^2-x_2+2\leq0, \\
+    &g_2(\bm{x})=x_1+x_2-6\leq0, \\
+    &g_3(\bm{x})=-x_1, \\
+    &g_4(\bm{x})=-x_2.
+}
+
+外点法:
+\optmodule*{\min_{\bm{x}}}{f(\bm{x})-\mu\sum_{i=1}^4\frac{1}{g_i(\bm{x})}}{
+    &g_1(\bm{x})=x_1^2-x_2+2\leq0, \\
+    &g_2(\bm{x})=x_1+x_2-6\leq0, \\
+    &g_3(\bm{x})=-x_1, \\
+    &g_4(\bm{x})=-x_2.
+}
+其中$\mu\to+\infty$.

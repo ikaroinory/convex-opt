@@ -1,0 +1,35 @@
+\section*{2}
+
+对于优化问题
+\optmodule*{\min_{\bm{x}}}{f(\bm{x})}{
+    &g(\bm{x})\leq\bm{0}, \\
+    &h(\bm{x})=\bm{0},
+}
+其中$f:\mathbb{R}^n\to\mathbb{R}$, $g:\mathbb{R}^n\to\mathbb{R}^m$, $h:\mathbb{R}^n\to\mathbb{R}^l$.
+
+若方向$\bm{d}$是点$\bm{x}_k$处的一个可行下降方向, 首先有
+\begin{equation*}
+    [\nabla f(\bm{x}_k)]^\mathrm{T}\bm{d}<0.
+\end{equation*}
+
+为了保证可行性, 方向$\bm{d}$必须也是约束的可行方向, 因此有一阶可行性条件, 即
+\begin{align*}
+    &\lim_{\alpha\to0}h(\bm{x}_k+\alpha\bm{d})=\lim_{\alpha\to0}h(\bm{x}_k)+\alpha[\nabla h(\bm{x}_k)]^\mathrm{T}\bm{d}=0, \\
+    &\lim_{\alpha\to0}g(\bm{x}_k+\alpha\bm{d})=\lim_{\alpha\to0}g(\bm{x}_k)+\alpha[\nabla g(\bm{x}_k)]^\mathrm{T}\bm{d}\leq0,
+\end{align*}
+因此有
+\begin{equation*}
+    [\nabla h(\bm{x}_k)]^\mathrm{T}\bm{d}=0,
+\end{equation*}
+\begin{equation*}
+    [\nabla g(\bm{x}_k)]^\mathrm{T}\bm{d}\leq0.
+\end{equation*}
+
+因此方向$\bm{d}$是点$\bm{x}_k$的一个可行下降方向,当且仅当
+\begin{equation*}
+    \begin{cases}
+        [\nabla f(\bm{x}_k)]^\mathrm{T}\bm{d}<0, \\
+        [\nabla h(\bm{x}_k)]^\mathrm{T}\bm{d}=0, \\
+        [\nabla g(\bm{x}_k)]^\mathrm{T}\bm{d}\leq0.
+    \end{cases}
+\end{equation*}
